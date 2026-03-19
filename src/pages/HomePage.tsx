@@ -9,13 +9,13 @@ import { Link } from "react-router-dom";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 function Reveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
     <motion.div
-      variants={{ ...fade, visible: { ...fade.visible, transition: { ...fade.visible.transition, delay } } }}
+      variants={{ ...fade, visible: { ...fade.visible, transition: { duration: 0.5, ease: "easeOut" as const, delay } } }}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}

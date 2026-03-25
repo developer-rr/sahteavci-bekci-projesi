@@ -15,6 +15,7 @@ const navItems = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [lang, setLang] = useState<"TR" | "EN">("TR");
   const location = useLocation();
 
   useEffect(() => {
@@ -57,8 +58,22 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center">
+        {/* Desktop CTA + Lang */}
+        <div className="hidden lg:flex items-center gap-3">
+          <div className="flex items-center rounded-md border border-border overflow-hidden text-xs font-medium">
+            <button
+              onClick={() => setLang("TR")}
+              className={`px-2.5 py-1.5 transition-colors ${lang === "TR" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              TR
+            </button>
+            <button
+              onClick={() => setLang("EN")}
+              className={`px-2.5 py-1.5 transition-colors ${lang === "EN" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              EN
+            </button>
+          </div>
           <Button variant="cta" size="default" asChild>
             <a href="#">Ücretsiz Yükle</a>
           </Button>
@@ -92,6 +107,23 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            {/* Lang toggle mobile */}
+            <div className="flex items-center gap-2 px-4 py-2">
+              <div className="flex items-center rounded-md border border-border overflow-hidden text-xs font-medium">
+                <button
+                  onClick={() => setLang("TR")}
+                  className={`px-3 py-1.5 transition-colors ${lang === "TR" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  TR
+                </button>
+                <button
+                  onClick={() => setLang("EN")}
+                  className={`px-3 py-1.5 transition-colors ${lang === "EN" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  EN
+                </button>
+              </div>
+            </div>
             <div className="mt-4">
               <Button variant="cta" className="w-full" asChild>
                 <a href="#">Ücretsiz Yükle</a>

@@ -45,15 +45,19 @@ const values = [
   { icon: Lock, title: "Gizlilik Hassasiyeti", desc: "Veri minimizasyonu ve yerel işleme yaklaşımı, güvenlik hassasiyetini süreç boyunca korumayı amaçlar." },
 ];
 
+const teamMembers = [
+  { initials: "AK", name: "A.K.", title: "Kurucu & IP Stratejisti", desc: "15+ yıl marka hukuku" },
+  { initials: "MV", name: "M.V.", title: "Teknik Geliştirici", desc: "E-ticaret otomasyon uzmanı" },
+  { initials: "ET", name: "E.T.", title: "Müşteri Başarısı", desc: "Trendyol & Hepsiburada operasyon" },
+];
+
 export default function AboutPage() {
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/40 pt-20 pb-16 md:pt-28 md:pb-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <Reveal>
-            <Pill>Hakkımızda</Pill>
-          </Reveal>
+          <Reveal><Pill>Hakkımızda</Pill></Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">
               Marka Korumasını Daha Erişilebilir Hale Getirmek İçin Buradayız
@@ -121,8 +125,35 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* VALUES */}
+      {/* TEAM */}
       <Section variant="alt">
+        <Reveal>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Ekibimiz</h2>
+            <p className="text-muted-foreground">20+ yıllık çok yargı yetkili fikri mülkiyet ve e-ticaret deneyimi</p>
+          </div>
+        </Reveal>
+        <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
+          {teamMembers.map((m, i) => (
+            <Reveal key={i} delay={i * 0.08}>
+              <div className="bg-card rounded-xl border p-6 text-center shadow-sm">
+                <div className="h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center text-lg font-bold mx-auto mb-4">{m.initials}</div>
+                <h3 className="font-semibold text-foreground mb-1">{m.name}</h3>
+                <p className="text-sm text-primary font-medium mb-1">{m.title}</p>
+                <p className="text-xs text-muted-foreground">{m.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal>
+          <p className="text-center text-muted-foreground text-sm max-w-2xl mx-auto">
+            VENTOS ARQUEÁVEIS UNIPESSOAL LDA bünyesinde, Portekiz merkezli olarak faaliyet gösteriyoruz.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* VALUES */}
+      <Section>
         <Reveal>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">Nasıl Bir Yaklaşım Benimsiyoruz?</h2>
         </Reveal>
@@ -140,7 +171,7 @@ export default function AboutPage() {
       </Section>
 
       {/* EDITORIAL */}
-      <Section>
+      <Section variant="alt">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
             <Eye className="h-10 w-10 text-primary mx-auto mb-5" />

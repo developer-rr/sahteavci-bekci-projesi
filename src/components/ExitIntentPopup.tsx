@@ -25,7 +25,6 @@ export default function ExitIntentPopup() {
         document.removeEventListener("mouseout", handler);
       }
     };
-    // Delay listener to avoid immediate trigger
     const t = setTimeout(() => document.addEventListener("mouseout", handler), 3000);
     return () => {
       clearTimeout(t);
@@ -44,7 +43,7 @@ export default function ExitIntentPopup() {
         </button>
 
         <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">Bekleyin! Özel Teklif</h2>
-        <p className="text-muted-foreground text-sm mb-5">E-posta bırakın, PRO planı için indirim kodu gönderelim.</p>
+        <p className="text-muted-foreground text-sm mb-5">Şimdi abone olun, PRO planında 14 gün ücretsiz deneyin.</p>
 
         <form onSubmit={e => e.preventDefault()} className="space-y-4">
           <Input type="email" placeholder="E-posta adresiniz" value={email} onChange={e => setEmail(e.target.value)} />
@@ -54,7 +53,7 @@ export default function ExitIntentPopup() {
             <span>KVKK ve iletişim onayını kabul ediyorum</span>
           </label>
 
-          <Button variant="cta" className="w-full" disabled={!email || !consent}>İndirimi Al</Button>
+          <Button variant="cta" className="w-full" disabled={!email || !consent}>14 Günü Başlat</Button>
         </form>
 
         <button onClick={dismiss} className="block mx-auto mt-4 text-muted-foreground text-sm hover:text-foreground transition-colors">

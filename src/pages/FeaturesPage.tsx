@@ -75,6 +75,124 @@ function AnchorNav() {
   );
 }
 
+/* SVG Mockups for each capability */
+function SearchMockup() {
+  return (
+    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <rect width="320" height="200" rx="12" fill="#1A1A2E" />
+      <rect x="16" y="16" width="288" height="32" rx="8" fill="#2A2A4E" />
+      <circle cx="32" cy="32" r="8" stroke="#D32F2F" strokeWidth="2" fill="none" />
+      <rect x="48" y="26" width="120" height="12" rx="4" fill="#3A3A5E" />
+      <rect x="240" y="22" width="48" height="20" rx="6" fill="#D32F2F" opacity="0.2" />
+      <text x="248" y="36" fill="#D32F2F" fontSize="8" fontWeight="600">Tara</text>
+      <rect x="16" y="60" width="288" height="36" rx="8" fill="#2A2A4E" />
+      <circle cx="32" cy="78" r="4" fill="#4ADE80" />
+      <rect x="44" y="72" width="160" height="8" rx="3" fill="#3A3A5E" />
+      <rect x="240" y="72" width="48" height="8" rx="3" fill="#3A3A5E" />
+      <rect x="16" y="104" width="288" height="36" rx="8" fill="#D32F2F" opacity="0.08" stroke="#D32F2F" strokeWidth="1" opacity="0.3" />
+      <circle cx="32" cy="122" r="4" fill="#D32F2F" />
+      <rect x="44" y="116" width="140" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
+      <rect x="240" y="116" width="48" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
+      <rect x="16" y="148" width="288" height="36" rx="8" fill="#D32F2F" opacity="0.08" stroke="#D32F2F" strokeWidth="1" opacity="0.3" />
+      <circle cx="32" cy="166" r="4" fill="#D32F2F" />
+      <rect x="44" y="160" width="120" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
+      <rect x="240" y="160" width="48" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
+    </svg>
+  );
+}
+
+function AnalysisMockup() {
+  return (
+    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <rect width="320" height="200" rx="12" fill="#1A1A2E" />
+      <text x="16" y="30" fill="#FFFFFF" fontSize="10" fontWeight="600" opacity="0.7">Risk Analizi</text>
+      <rect x="16" y="44" width="60" height="100" rx="4" fill="#D32F2F" opacity="0.7" />
+      <rect x="88" y="74" width="60" height="70" rx="4" fill="#D32F2F" opacity="0.5" />
+      <rect x="160" y="94" width="60" height="50" rx="4" fill="#D32F2F" opacity="0.3" />
+      <rect x="232" y="114" width="60" height="30" rx="4" fill="#D32F2F" opacity="0.15" />
+      <line x1="16" y1="155" x2="292" y2="155" stroke="#3A3A5E" strokeWidth="1" />
+      <text x="30" y="170" fill="#FFFFFF" fontSize="7" opacity="0.5">Yüksek</text>
+      <text x="100" y="170" fill="#FFFFFF" fontSize="7" opacity="0.5">Orta</text>
+      <text x="172" y="170" fill="#FFFFFF" fontSize="7" opacity="0.5">Düşük</text>
+      <text x="240" y="170" fill="#FFFFFF" fontSize="7" opacity="0.5">Normal</text>
+      <rect x="16" y="180" width="80" height="8" rx="4" fill="#D32F2F" opacity="0.2" />
+      <text x="20" y="187" fill="#D32F2F" fontSize="6">3 Yüksek Risk</text>
+    </svg>
+  );
+}
+
+function VisualMockup() {
+  return (
+    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <rect width="320" height="200" rx="12" fill="#1A1A2E" />
+      <text x="16" y="28" fill="#FFFFFF" fontSize="10" fontWeight="600" opacity="0.7">Görsel Karşılaştırma</text>
+      <rect x="16" y="40" width="130" height="100" rx="8" fill="#2A2A4E" />
+      <text x="52" y="95" fill="#4ADE80" fontSize="8" fontWeight="600">Orijinal</text>
+      <rect x="174" y="40" width="130" height="100" rx="8" fill="#2A2A4E" stroke="#D32F2F" strokeWidth="2" strokeDasharray="4 2" />
+      <text x="210" y="95" fill="#D32F2F" fontSize="8" fontWeight="600">Şüpheli</text>
+      <path d="M152 90 L168 82 M152 90 L168 98" stroke="#D32F2F" strokeWidth="2" />
+      <rect x="16" y="154" width="288" height="30" rx="8" fill="#D32F2F" opacity="0.1" />
+      <text x="100" y="173" fill="#D32F2F" fontSize="9" fontWeight="600">%87 Benzerlik Tespit Edildi</text>
+    </svg>
+  );
+}
+
+function EvidenceMockup() {
+  return (
+    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <rect width="320" height="200" rx="12" fill="#1A1A2E" />
+      <text x="16" y="28" fill="#FFFFFF" fontSize="10" fontWeight="600" opacity="0.7">Delil Kaydı</text>
+      <rect x="16" y="40" width="288" height="28" rx="6" fill="#2A2A4E" />
+      <circle cx="30" cy="54" r="5" fill="#4ADE80" />
+      <rect x="42" y="49" width="100" height="6" rx="3" fill="#3A3A5E" />
+      <rect x="230" y="48" width="58" height="12" rx="4" fill="#4ADE80" opacity="0.2" />
+      <text x="238" y="57" fill="#4ADE80" fontSize="7">SHA-256 ✓</text>
+      <rect x="16" y="76" width="288" height="28" rx="6" fill="#2A2A4E" />
+      <circle cx="30" cy="90" r="5" fill="#D32F2F" />
+      <rect x="42" y="85" width="120" height="6" rx="3" fill="#3A3A5E" />
+      <rect x="230" y="84" width="58" height="12" rx="4" fill="#D32F2F" opacity="0.2" />
+      <text x="238" y="93" fill="#D32F2F" fontSize="7">Bekliyor</text>
+      <rect x="16" y="112" width="288" height="28" rx="6" fill="#2A2A4E" />
+      <circle cx="30" cy="126" r="5" fill="#4ADE80" />
+      <rect x="42" y="121" width="80" height="6" rx="3" fill="#3A3A5E" />
+      <rect x="230" y="120" width="58" height="12" rx="4" fill="#4ADE80" opacity="0.2" />
+      <text x="238" y="129" fill="#4ADE80" fontSize="7">SHA-256 ✓</text>
+      <rect x="16" y="156" width="140" height="28" rx="8" fill="#D32F2F" />
+      <text x="42" y="174" fill="#FFFFFF" fontSize="9" fontWeight="600">Dışa Aktar (CSV)</text>
+    </svg>
+  );
+}
+
+function ComplaintMockup() {
+  return (
+    <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      <rect width="320" height="200" rx="12" fill="#1A1A2E" />
+      <text x="16" y="28" fill="#FFFFFF" fontSize="10" fontWeight="600" opacity="0.7">Şikayet Şablonu</text>
+      <rect x="16" y="40" width="288" height="20" rx="4" fill="#2A2A4E" />
+      <rect x="24" y="46" width="80" height="6" rx="3" fill="#3A3A5E" />
+      <rect x="16" y="68" width="288" height="80" rx="4" fill="#2A2A4E" />
+      <rect x="24" y="76" width="260" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="24" y="86" width="240" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="24" y="96" width="200" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="24" y="106" width="260" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="24" y="116" width="180" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="24" y="126" width="220" height="4" rx="2" fill="#3A3A5E" />
+      <rect x="16" y="160" width="100" height="28" rx="8" fill="#D32F2F" />
+      <text x="32" y="178" fill="#FFFFFF" fontSize="9" fontWeight="600">Kopyala</text>
+      <rect x="128" y="160" width="100" height="28" rx="8" fill="#2A2A4E" stroke="#D32F2F" strokeWidth="1" />
+      <text x="144" y="178" fill="#D32F2F" fontSize="9" fontWeight="600">Düzenle</text>
+    </svg>
+  );
+}
+
+const mockups: Record<string, React.ReactNode> = {
+  arama: <SearchMockup />,
+  analiz: <AnalysisMockup />,
+  gorsel: <VisualMockup />,
+  delil: <EvidenceMockup />,
+  sikayet: <ComplaintMockup />,
+};
+
 interface CapabilitySectionProps {
   id: string;
   icon: React.ReactNode;
@@ -85,6 +203,7 @@ interface CapabilitySectionProps {
 }
 
 function CapabilitySection({ id, icon, title, body, bullets, reverse }: CapabilitySectionProps) {
+  const mockup = mockups[id];
   return (
     <Section id={id} variant={reverse ? "alt" : "default"}>
       <Reveal>
@@ -104,13 +223,17 @@ function CapabilitySection({ id, icon, title, body, bullets, reverse }: Capabili
               ))}
             </ul>
           </div>
-          <div className={`${reverse ? "md:order-1" : ""} bg-muted/50 rounded-2xl border border-border p-8 md:p-12 flex items-center justify-center min-h-[220px]`}>
-            <div className="text-center text-muted-foreground/60">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 text-primary/40 mb-3">
-                {icon}
+          <div className={`${reverse ? "md:order-1" : ""} rounded-2xl overflow-hidden border border-border shadow-lg`}>
+            {mockup || (
+              <div className="bg-muted/50 p-8 md:p-12 flex items-center justify-center min-h-[220px]">
+                <div className="text-center text-muted-foreground/60">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 text-primary/40 mb-3">
+                    {icon}
+                  </div>
+                  <p className="text-xs">Ürün görseli</p>
+                </div>
               </div>
-              <p className="text-xs">Ürün görseli</p>
-            </div>
+            )}
           </div>
         </div>
       </Reveal>
@@ -148,10 +271,8 @@ export default function FeaturesPage() {
         </Reveal>
       </Section>
 
-      {/* ANCHOR NAV */}
       <AnchorNav />
 
-      {/* CAPABILITY SECTIONS */}
       <CapabilitySection
         id="arama"
         icon={<Search className="w-6 h-6" />}

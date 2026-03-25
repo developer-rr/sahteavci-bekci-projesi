@@ -5,6 +5,7 @@ import Pill from "@/components/ui/pill";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useLang } from "@/lib/i18n";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -25,128 +26,102 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
   );
 }
 
-const plans = [
-  {
-    name: "Ücretsiz",
-    price: "₺0",
-    period: "/ay",
-    sub: "",
-    desc: "Temel ihtiyaçla başlamak isteyenler için.",
-    features: ["1 marka", "50 tarama / ay", "Temel jargon tespiti", "Topluluk desteği"],
-    cta: "Ücretsiz Başla",
-    popular: false,
-  },
-  {
-    name: "Başlangıç",
-    price: "$49",
-    period: "/ay",
-    sub: "~₺1.600",
-    desc: "İlk düzenli takip akışını kurmak isteyen ekipler için.",
-    features: ["5 marka", "500 tarama / ay", "pHash görsel analizi", "Şikayet şablonları", "CSV dışa aktarım", "Email desteği"],
-    cta: "Başlangıç Planını Seç",
-    popular: true,
-  },
-  {
-    name: "Pro",
-    price: "$99",
-    period: "/ay",
-    sub: "~₺3.200",
-    desc: "Daha yoğun tarama ve daha esnek analiz isteyenler için.",
-    features: ["Sınırsız marka", "Sınırsız tarama", "BYOK AI", "Gelişmiş görsel analiz", "Blockchain zaman damgası", "Öncelikli destek"],
-    cta: "Pro Planını Seç",
-    popular: false,
-  },
-  {
-    name: "Uzman",
-    price: "$149",
-    period: "/ay",
-    sub: "~₺4.800",
-    desc: "Danışmanlık ve daha özel iş akışları isteyen kullanım senaryoları için.",
-    features: ["Tüm PRO özellikleri", "CLIP API entegrasyonu", "Mahkeme paketi", "Özel şablonlar", "Danışmanlık"],
-    cta: "Uzman Planını Seç",
-    popular: false,
-  },
-];
-
-const matrixRows = [
-  { label: "Marka sayısı", values: ["1", "5", "Sınırsız", "Sınırsız"] },
-  { label: "Aylık tarama limiti", values: ["50", "500", "Sınırsız", "Sınırsız"] },
-  { label: "Türkçe jargon desteği", values: [true, true, true, true] },
-  { label: "Görsel analiz", values: [false, true, true, true] },
-  { label: "Şikayet şablonları", values: [false, true, true, true] },
-  { label: "CSV dışa aktarım", values: [false, true, true, true] },
-  { label: "Öncelikli destek", values: [false, false, true, true] },
-  { label: "Danışmanlık", values: [false, false, false, true] },
-  { label: "Mahkeme paketi", values: [false, false, false, true] },
-];
-
-const recommendations = [
-  { profile: "Yeni başlayan küçük marka", plan: "Ücretsiz", desc: "İlk deneyimi yaşamak ve temel tarama ihtiyacını karşılamak için." },
-  { profile: "Düzenli tarama yapan operasyon ekibi", plan: "Başlangıç", desc: "Birden fazla markayı takip eden ve düzenli raporlama isteyen ekipler için." },
-  { profile: "Yoğun takip ihtiyacı olan marka", plan: "Pro", desc: "Sınırsız tarama, gelişmiş analiz ve öncelikli destek arayanlar için." },
-  { profile: "Danışman/uzman destekli yapı", plan: "Uzman", desc: "Müvekkil bazlı takip, mahkeme paketi ve özel şablonlar için." },
-];
-
-const faqItems = [
-  { q: "İstediğim zaman plan değiştirebilir miyim?", a: "Evet. Planlar arası geçiş mümkün olacak şekilde kurgulanmaktadır. Geçiş koşulları satın alma aşamasında detaylandırılır." },
-  { q: "Ücretsiz plan gerçekten ücretsiz mi?", a: "Evet. Ücretsiz plan, temel tarama ve jargon tespiti özelliklerini içerir ve herhangi bir ödeme bilgisi gerektirmez." },
-  { q: "Taksitli ödeme var mı?", a: "Taksitli ödeme desteği sunulması hedeflenmektedir. Nihai ödeme seçenekleri satın alma aşamasında gösterilir." },
-  { q: "Kurumsal kullanım için özel seçenek sunuluyor mu?", a: "Daha büyük ekipler veya özel ihtiyaçlar için iletişime geçerek uygun bir çözüm değerlendirebilirsiniz." },
-  { q: "İade politikasını nerede görebilirim?", a: "İade koşulları hakkında detaylı bilgiye yasal sayfalarımızdan ulaşabilirsiniz." },
-];
-
 export default function PricingPage() {
+  const { tr } = useLang();
+
+  const plans = [
+    {
+      nameKey: "pricep.plan.free", price: "₺0", period: "/ay", sub: "",
+      descKey: "pricep.plan.free.desc",
+      features: ["1 marka", "50 tarama / ay", "Temel jargon tespiti", "Topluluk desteği"],
+      ctaKey: "pricep.plan.free.cta", popular: false,
+    },
+    {
+      nameKey: "pricep.plan.starter", price: "$49", period: "/ay", sub: "~₺1.600",
+      descKey: "pricep.plan.starter.desc",
+      features: ["5 marka", "500 tarama / ay", "pHash görsel analizi", "Şikayet şablonları", "CSV dışa aktarım", "Email desteği"],
+      ctaKey: "pricep.plan.starter.cta", popular: true,
+    },
+    {
+      nameKey: "pricep.plan.pro", price: "$99", period: "/ay", sub: "~₺3.200",
+      descKey: "pricep.plan.pro.desc",
+      features: ["Sınırsız marka", "Sınırsız tarama", "BYOK AI", "Gelişmiş görsel analiz", "Blockchain zaman damgası", "Öncelikli destek"],
+      ctaKey: "pricep.plan.pro.cta", popular: false,
+    },
+    {
+      nameKey: "pricep.plan.expert", price: "$149", period: "/ay", sub: "~₺4.800",
+      descKey: "pricep.plan.expert.desc",
+      features: ["Tüm PRO özellikleri", "CLIP API entegrasyonu", "Mahkeme paketi", "Özel şablonlar", "Danışmanlık"],
+      ctaKey: "pricep.plan.expert.cta", popular: false,
+    },
+  ];
+
+  const matrixRows = [
+    { key: "pricep.matrix.brands", values: ["1", "5", "Sınırsız", "Sınırsız"] },
+    { key: "pricep.matrix.scans", values: ["50", "500", "Sınırsız", "Sınırsız"] },
+    { key: "pricep.matrix.jargon", values: [true, true, true, true] },
+    { key: "pricep.matrix.visual", values: [false, true, true, true] },
+    { key: "pricep.matrix.complaint", values: [false, true, true, true] },
+    { key: "pricep.matrix.csv", values: [false, true, true, true] },
+    { key: "pricep.matrix.priority", values: [false, false, true, true] },
+    { key: "pricep.matrix.consulting", values: [false, false, false, true] },
+    { key: "pricep.matrix.court", values: [false, false, false, true] },
+  ];
+
+  const recommendations = [
+    { profileKey: "pricep.rec1.profile", planKey: "pricep.plan.free", descKey: "pricep.rec1.desc" },
+    { profileKey: "pricep.rec2.profile", planKey: "pricep.plan.starter", descKey: "pricep.rec2.desc" },
+    { profileKey: "pricep.rec3.profile", planKey: "pricep.plan.pro", descKey: "pricep.rec3.desc" },
+    { profileKey: "pricep.rec4.profile", planKey: "pricep.plan.expert", descKey: "pricep.rec4.desc" },
+  ];
+
+  const faqItems = [
+    { qKey: "pricep.faq1.q", aKey: "pricep.faq1.a" },
+    { qKey: "pricep.faq2.q", aKey: "pricep.faq2.a" },
+    { qKey: "pricep.faq3.q", aKey: "pricep.faq3.a" },
+    { qKey: "pricep.faq4.q", aKey: "pricep.faq4.a" },
+    { qKey: "pricep.faq5.q", aKey: "pricep.faq5.a" },
+  ];
+
   return (
     <>
-      {/* HERO */}
       <Section className="pt-20 md:pt-28 pb-10 md:pb-14 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/60 -z-10" />
         <Reveal>
           <div className="max-w-3xl">
-            <Pill variant="primary" className="mb-5">Fiyatlandırma</Pill>
+            <Pill variant="primary" className="mb-5">{tr("pricep.pill")}</Pill>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground leading-[1.15] mb-5">
-              İhtiyacınıza Uygun Planla <span className="text-primary">Başlayın</span>
+              {tr("pricep.title.1")}<span className="text-primary">{tr("pricep.title.highlight")}</span>
             </h1>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-2xl">
-              SahteAvcı, küçük ve orta ölçekli markaların erişebileceği bir fiyat yapısıyla kurgulanmıştır.
-            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-2xl">{tr("pricep.subtitle")}</p>
             <div className="flex flex-wrap gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">Ücretsiz Başla</a></Button>
-              <Button variant="outline" size="lg" asChild><Link to="/karsilastirma">Karşılaştırmayı Gör</Link></Button>
+              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.start")}</a></Button>
+              <Button variant="outline" size="lg" asChild><Link to="/karsilastirma">{tr("pricep.compare")}</Link></Button>
             </div>
           </div>
         </Reveal>
       </Section>
 
-      {/* PLAN INTRO */}
       <Section>
         <Reveal>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl mb-12">
-            Her ekip aynı ihtiyaca sahip değildir. Kimi yalnızca temel tarama ister, kimi daha fazla marka, görsel analiz veya destek ihtiyacıyla ilerler.
-          </p>
+          <p className="text-muted-foreground leading-relaxed max-w-3xl mb-12">{tr("pricep.intro")}</p>
         </Reveal>
-
-        {/* CARDS */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {plans.map((p, i) => (
             <Reveal key={i} delay={i * 0.07}>
-              <div className={`relative rounded-2xl border p-6 h-full flex flex-col ${
-                p.popular
-                  ? "border-primary bg-primary/[0.03] shadow-lg shadow-primary/10"
-                  : "border-border bg-card"
-              }`}>
+              <div className={`relative rounded-2xl border p-6 h-full flex flex-col ${p.popular ? "border-primary bg-primary/[0.03] shadow-lg shadow-primary/10" : "border-border bg-card"}`}>
                 {p.popular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Pill variant="primary">Popüler</Pill>
+                    <Pill variant="primary">{tr("price.popular")}</Pill>
                   </div>
                 )}
-                <h3 className="text-lg font-bold text-foreground mb-1">{p.name}</h3>
+                <h3 className="text-lg font-bold text-foreground mb-1">{tr(p.nameKey)}</h3>
                 <div className="flex items-baseline gap-1 mb-1">
                   <span className="text-3xl font-extrabold text-foreground">{p.price}</span>
                   <span className="text-muted-foreground text-sm">{p.period}</span>
                 </div>
                 {p.sub && <span className="text-xs text-muted-foreground mb-3">{p.sub}</span>}
-                <p className="text-sm text-muted-foreground mb-5">{p.desc}</p>
+                <p className="text-sm text-muted-foreground mb-5">{tr(p.descKey)}</p>
                 <ul className="space-y-2 mb-6 flex-1">
                   {p.features.map((f, fi) => (
                     <li key={fi} className="flex items-start gap-2 text-sm text-foreground">
@@ -156,7 +131,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <Button variant={p.popular ? "cta" : "outline"} className="w-full" asChild>
-                  <a href="#">{p.cta}</a>
+                  <a href="#">{tr(p.ctaKey)}</a>
                 </Button>
               </div>
             </Reveal>
@@ -164,26 +139,23 @@ export default function PricingPage() {
         </div>
       </Section>
 
-      {/* FEATURE MATRIX */}
       <Section variant="alt">
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">Özellik Karşılaştırması</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">{tr("pricep.matrix.title")}</h2>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px] text-sm">
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-3 pr-4 font-medium text-muted-foreground"></th>
                   {plans.map((p, i) => (
-                    <th key={i} className={`text-center py-3 px-3 font-semibold ${p.popular ? "text-primary" : "text-foreground"}`}>
-                      {p.name}
-                    </th>
+                    <th key={i} className={`text-center py-3 px-3 font-semibold ${p.popular ? "text-primary" : "text-foreground"}`}>{tr(p.nameKey)}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {matrixRows.map((row, ri) => (
                   <tr key={ri} className="border-b border-border/60">
-                    <td className="py-3 pr-4 text-foreground font-medium">{row.label}</td>
+                    <td className="py-3 pr-4 text-foreground font-medium">{tr(row.key)}</td>
                     {row.values.map((v, vi) => (
                       <td key={vi} className="text-center py-3 px-3">
                         {typeof v === "boolean" ? (
@@ -201,35 +173,33 @@ export default function PricingPage() {
         </Reveal>
       </Section>
 
-      {/* DECISION HELP */}
       <Section>
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">Hangi Plan Kimin İçin?</h2>
-          <p className="text-muted-foreground text-center mb-10 max-w-xl mx-auto">İhtiyacınıza en yakın profili seçerek başlayın.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">{tr("pricep.decision.title")}</h2>
+          <p className="text-muted-foreground text-center mb-10 max-w-xl mx-auto">{tr("pricep.decision.subtitle")}</p>
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {recommendations.map((r, i) => (
             <Reveal key={i} delay={i * 0.07}>
               <div className="bg-card rounded-xl border border-border p-6 h-full">
-                <Pill variant="primary" className="mb-3">{r.plan}</Pill>
-                <h4 className="font-semibold text-foreground mb-2">{r.profile}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{r.desc}</p>
+                <Pill variant="primary" className="mb-3">{tr(r.planKey)}</Pill>
+                <h4 className="font-semibold text-foreground mb-2">{tr(r.profileKey)}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{tr(r.descKey)}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* FAQ */}
       <Section variant="alt">
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">Fiyatlandırma Hakkında Sorular</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">{tr("pricep.faq.title")}</h2>
           <div className="max-w-2xl mx-auto">
             <Accordion type="single" collapsible className="space-y-3">
               {faqItems.map((f, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="bg-card border border-border rounded-xl px-5">
-                  <AccordionTrigger className="text-left text-foreground font-medium py-4">{f.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4">{f.a}</AccordionContent>
+                  <AccordionTrigger className="text-left text-foreground font-medium py-4">{tr(f.qKey)}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4">{tr(f.aKey)}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -237,25 +207,21 @@ export default function PricingPage() {
         </Reveal>
       </Section>
 
-      {/* FOOTNOTE */}
       <Section>
         <Reveal>
-          <p className="text-xs text-muted-foreground text-center max-w-2xl mx-auto">
-            Tüm ücretli planlar için taksitli ödeme desteği sunulması hedeflenmektedir. Nihai ödeme ve sözleşme koşulları satın alma aşamasında gösterilir.
-          </p>
+          <p className="text-xs text-muted-foreground text-center max-w-2xl mx-auto">{tr("pricep.footnote")}</p>
         </Reveal>
       </Section>
 
-      {/* FINAL CTA */}
       <section className="bg-secondary text-secondary-foreground py-16 md:py-20 px-4 md:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Önce deneyin, sonra ölçeklendirin</h2>
-            <p className="text-secondary-foreground/70 mb-8 max-w-xl mx-auto">Ücretsiz plan ile başlayarak iş akışınıza uygunluğu test edebilirsiniz.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("pricep.cta.title")}</h2>
+            <p className="text-secondary-foreground/70 mb-8 max-w-xl mx-auto">{tr("pricep.cta.text")}</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">Ücretsiz Başla</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.start")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
-                <Link to="/ozellikler">Özellikleri Gör</Link>
+                <Link to="/ozellikler">{tr("pricep.cta.features")}</Link>
               </Button>
             </div>
           </div>

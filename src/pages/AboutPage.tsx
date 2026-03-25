@@ -4,6 +4,7 @@ import Section from "@/components/ui/section";
 import Pill from "@/components/ui/pill";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLang } from "@/lib/i18n";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -24,113 +25,104 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
   );
 }
 
-const audiences = [
-  { icon: Briefcase, title: "Küçük marka sahipleri", desc: "Pazaryerlerinde kendi markalarını tek başına veya küçük ekiplerle koruyan işletmeler. SahteAvcı, manuel yükü azaltarak süreci daha yönetilebilir hale getirir." },
-  { icon: Users, title: "Pazaryeri operasyon ekipleri", desc: "Birden fazla markayı veya listing'i takip eden ekipler. Düzenli tarama ve delil akışı ile operasyonel standart sağlanır." },
-  { icon: Shield, title: "Marka yöneticileri", desc: "Marka değerini ve itibarını korumakla görevli profesyoneller. Hızlı tespit ve raporlama ile risk yönetimini destekler." },
-  { icon: Scale, title: "Fikri mülkiyet danışmanları", desc: "Müvekkilleri adına sahte ürün takibi yapan uzmanlar. Yapılandırılmış delil akışı ve dışa aktarım ile iş sürecini hızlandırır." },
-];
-
-const companyInfo = [
-  { icon: Building2, label: "Şirket", value: "VENTOS ARQUEÁVEIS UNIPESSOAL LDA" },
-  { icon: Mail, label: "Destek", value: "destek@sahteavci.com" },
-  { icon: MapPin, label: "Kayıt ülkesi", value: "Portekiz" },
-  { icon: Globe, label: "Odak", value: "Türk pazaryerlerinde marka koruma" },
-];
-
-const values = [
-  { icon: Heart, title: "Güvenilirlik", desc: "Abartısız iletişim, tutarlı çalışma mantığı ve kullanıcıya açık bir süreç sunmak temel hedefimizdir." },
-  { icon: Lightbulb, title: "Pratiklik", desc: "Her özellik, gerçek operasyonel ihtiyaçlara yanıt verecek şekilde tasarlanır. Gereksiz karmaşıklıktan kaçınılır." },
-  { icon: Users, title: "Erişilebilirlik", desc: "Fiyatlandırma ve kullanım kolaylığı, büyük bütçelere sahip olmayan ekiplerin de araçtan fayda görmesini sağlamaya yöneliktir." },
-  { icon: Lock, title: "Gizlilik Hassasiyeti", desc: "Veri minimizasyonu ve yerel işleme yaklaşımı, güvenlik hassasiyetini süreç boyunca korumayı amaçlar." },
-];
-
-const teamMembers = [
-  { initials: "AK", name: "A.K.", title: "Kurucu & IP Stratejisti", desc: "15+ yıl marka hukuku" },
-  { initials: "MV", name: "M.V.", title: "Teknik Geliştirici", desc: "E-ticaret otomasyon uzmanı" },
-  { initials: "ET", name: "E.T.", title: "Müşteri Başarısı", desc: "Trendyol & Hepsiburada operasyon" },
-];
-
 export default function AboutPage() {
+  const { tr } = useLang();
+
+  const audiences = [
+    { icon: Briefcase, titleKey: "about.aud1.title", descKey: "about.aud1.desc" },
+    { icon: Users, titleKey: "about.aud2.title", descKey: "about.aud2.desc" },
+    { icon: Shield, titleKey: "about.aud3.title", descKey: "about.aud3.desc" },
+    { icon: Scale, titleKey: "about.aud4.title", descKey: "about.aud4.desc" },
+  ];
+
+  const companyInfo = [
+    { icon: Building2, labelKey: "about.company.label1", value: "VENTOS ARQUEÁVEIS UNIPESSOAL LDA" },
+    { icon: Mail, labelKey: "about.company.label2", value: "destek@sahteavci.com" },
+    { icon: MapPin, labelKey: "about.company.label3", value: "Portugal" },
+    { icon: Globe, labelKey: "about.company.label4", valueKey: "about.company.value4" },
+  ];
+
+  const values = [
+    { icon: Heart, titleKey: "about.val1.title", descKey: "about.val1.desc" },
+    { icon: Lightbulb, titleKey: "about.val2.title", descKey: "about.val2.desc" },
+    { icon: Users, titleKey: "about.val3.title", descKey: "about.val3.desc" },
+    { icon: Lock, titleKey: "about.val4.title", descKey: "about.val4.desc" },
+  ];
+
+  const teamMembers = [
+    { initials: "AK", name: "A.K.", titleKey: "about.team.m1.title", descKey: "about.team.m1.desc" },
+    { initials: "MV", name: "M.V.", titleKey: "about.team.m2.title", descKey: "about.team.m2.desc" },
+    { initials: "ET", name: "E.T.", titleKey: "about.team.m3.title", descKey: "about.team.m3.desc" },
+  ];
+
   return (
     <>
-      {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/40 pt-20 pb-16 md:pt-28 md:pb-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <Reveal><Pill>Hakkımızda</Pill></Reveal>
+          <Reveal><Pill>{tr("about.pill")}</Pill></Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">
-              Marka Korumasını Daha Erişilebilir Hale Getirmek İçin Buradayız
-            </h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">{tr("about.hero.title")}</h1>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">
-              SahteAvcı, Türk pazaryerlerinde sahte ürün takibini küçük ve orta ölçekli markalar için daha uygulanabilir hale getirmek amacıyla tasarlandı.
-            </p>
+            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">{tr("about.hero.subtitle")}</p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-              <Button variant="cta" size="lg" asChild><a href="#">Ücretsiz Yükle</a></Button>
-              <Button variant="outline" size="lg" asChild><Link to="/iletisim">İletişime Geç</Link></Button>
+              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="outline" size="lg" asChild><Link to="/iletisim">{tr("about.contact")}</Link></Button>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* MISSION */}
       <Section>
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-5">Neden SahteAvcı?</h2>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Sahte ürün takibi çoğu işletme için iki zorlu seçenek arasında kalıyor: ya manuel olarak saatler harcamak ya da küçük ekipler için ağır ve pahalı çözümlere yönelmek. SahteAvcı, bu iki uç arasında daha pratik bir yol sunmayı hedefler.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-5">{tr("about.mission.title")}</h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">{tr("about.mission.text")}</p>
           </div>
         </Reveal>
       </Section>
 
-      {/* WHO WE BUILD FOR */}
       <Section variant="alt">
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">Kimin İçin Geliştiriyoruz?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">{tr("about.audience.title")}</h2>
         </Reveal>
         <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {audiences.map((a, i) => (
-            <Reveal key={a.title} delay={i * 0.07}>
+            <Reveal key={i} delay={i * 0.07}>
               <div className="bg-card rounded-xl border border-border p-6 h-full">
                 <a.icon className="h-9 w-9 text-primary mb-4" />
-                <h3 className="font-semibold text-foreground text-lg mb-2">{a.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{a.desc}</p>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{tr(a.titleKey)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{tr(a.descKey)}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* COMPANY / TRUST */}
       <Section>
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">Kurumsal Yapı</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">{tr("about.company.title")}</h2>
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
           {companyInfo.map((c, i) => (
-            <Reveal key={c.label} delay={i * 0.06}>
+            <Reveal key={i} delay={i * 0.06}>
               <div className="bg-card rounded-xl border border-border p-5 text-center h-full">
                 <c.icon className="h-7 w-7 text-primary mx-auto mb-3" />
-                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">{c.label}</p>
-                <p className="text-foreground text-sm font-medium">{c.value}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">{tr(c.labelKey)}</p>
+                <p className="text-foreground text-sm font-medium">{c.valueKey ? tr(c.valueKey) : c.value}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* TEAM */}
       <Section variant="alt">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Ekibimiz</h2>
-            <p className="text-muted-foreground">20+ yıllık çok yargı yetkili fikri mülkiyet ve e-ticaret deneyimi</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("team.title")}</h2>
+            <p className="text-muted-foreground">{tr("about.team.subtitle")}</p>
           </div>
         </Reveal>
         <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
@@ -139,59 +131,52 @@ export default function AboutPage() {
               <div className="bg-card rounded-xl border p-6 text-center shadow-sm">
                 <div className="h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center text-lg font-bold mx-auto mb-4">{m.initials}</div>
                 <h3 className="font-semibold text-foreground mb-1">{m.name}</h3>
-                <p className="text-sm text-primary font-medium mb-1">{m.title}</p>
-                <p className="text-xs text-muted-foreground">{m.desc}</p>
+                <p className="text-sm text-primary font-medium mb-1">{tr(m.titleKey)}</p>
+                <p className="text-xs text-muted-foreground">{tr(m.descKey)}</p>
               </div>
             </Reveal>
           ))}
         </div>
         <Reveal>
-          <p className="text-center text-muted-foreground text-sm max-w-2xl mx-auto">
-            VENTOS ARQUEÁVEIS UNIPESSOAL LDA bünyesinde, Portekiz merkezli olarak faaliyet gösteriyoruz.
-          </p>
+          <p className="text-center text-muted-foreground text-sm max-w-2xl mx-auto">{tr("about.team.company")}</p>
         </Reveal>
       </Section>
 
-      {/* VALUES */}
       <Section>
         <Reveal>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">Nasıl Bir Yaklaşım Benimsiyoruz?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10">{tr("about.values.title")}</h2>
         </Reveal>
         <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {values.map((v, i) => (
-            <Reveal key={v.title} delay={i * 0.07}>
+            <Reveal key={i} delay={i * 0.07}>
               <div className="bg-card rounded-xl border border-border p-6 h-full">
                 <v.icon className="h-8 w-8 text-primary mb-3" />
-                <h3 className="font-semibold text-foreground text-lg mb-2">{v.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{tr(v.titleKey)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{tr(v.descKey)}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* EDITORIAL */}
       <Section variant="alt">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
             <Eye className="h-10 w-10 text-primary mx-auto mb-5" />
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed italic">
-              "Bu site yalnızca ürün tanıtımı için değil; marka sahiplerinin neyle karşı karşıya olduğunu açıkça anlatmak, çözüm mantığını görünür kılmak ve daha güvenli bir başlangıç noktası sunmak için hazırlandı."
-            </p>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed italic">"{tr("about.editorial")}"</p>
           </div>
         </Reveal>
       </Section>
 
-      {/* FINAL CTA */}
       <section className="bg-secondary text-secondary-foreground py-16 md:py-20 px-4 md:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Markanızı korumaya daha düzenli bir şekilde başlayın</h2>
-            <p className="text-secondary-foreground/70 mb-8">Kurulumu tamamlayın, ilk taramanızı başlatın ve sürecin size uyup uymadığına bakın.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("about.cta.title")}</h2>
+            <p className="text-secondary-foreground/70 mb-8">{tr("about.cta.text")}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="cta" size="lg" asChild><a href="#">Ücretsiz Yükle</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
-                <Link to="/fiyatlandirma">Fiyatları Gör</Link>
+                <Link to="/fiyatlandirma">{tr("about.cta.prices")}</Link>
               </Button>
             </div>
           </Reveal>

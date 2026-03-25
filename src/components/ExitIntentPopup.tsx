@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 const STORAGE_KEY = "sahteavci_exit_dismissed";
 
@@ -10,6 +11,7 @@ export default function ExitIntentPopup() {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
+  const { tr } = useLang();
 
   const dismiss = useCallback(() => {
     setShow(false);
@@ -42,22 +44,22 @@ export default function ExitIntentPopup() {
           <X className="h-5 w-5" />
         </button>
 
-        <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">Bekleyin! Özel Teklif</h2>
-        <p className="text-muted-foreground text-sm mb-5">Şimdi abone olun, PRO planında 14 gün ücretsiz deneyin.</p>
+        <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">{tr("exit.title")}</h2>
+        <p className="text-muted-foreground text-sm mb-5">{tr("exit.desc")}</p>
 
         <form onSubmit={e => e.preventDefault()} className="space-y-4">
-          <Input type="email" placeholder="E-posta adresiniz" value={email} onChange={e => setEmail(e.target.value)} />
+          <Input type="email" placeholder={tr("exit.placeholder")} value={email} onChange={e => setEmail(e.target.value)} />
 
           <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer">
             <Checkbox checked={consent} onCheckedChange={v => setConsent(!!v)} className="mt-0.5" />
-            <span>KVKK ve iletişim onayını kabul ediyorum</span>
+            <span>{tr("exit.kvkk")}</span>
           </label>
 
-          <Button variant="cta" className="w-full" disabled={!email || !consent}>14 Günü Başlat</Button>
+          <Button variant="cta" className="w-full" disabled={!email || !consent}>{tr("exit.btn")}</Button>
         </form>
 
         <button onClick={dismiss} className="block mx-auto mt-4 text-muted-foreground text-sm hover:text-foreground transition-colors">
-          Hayır, teşekkürler
+          {tr("exit.close")}
         </button>
       </div>
     </div>

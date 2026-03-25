@@ -8,6 +8,7 @@ import Pill from "@/components/ui/pill";
 import { motion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
+import { useLang } from "@/lib/i18n";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -30,33 +31,34 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
 
 /* ==================== HERO ==================== */
 function HeroSection() {
+  const { tr } = useLang();
   return (
     <Section className="pt-20 md:pt-28 pb-12 md:pb-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/60 -z-10" />
       <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
         <Reveal>
           <div>
-            <Pill variant="primary" className="mb-5">Chrome Eklentisi</Pill>
+            <Pill variant="primary" className="mb-5">{tr("hero.badge")}</Pill>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-foreground leading-[1.15] mb-5">
-              Pazaryerlerindeki Sahte Ürünleri{" "}
-              <span className="text-primary">Saniyeler İçinde</span>{" "}
-              Tespit Edin.
+              {tr("hero.title.1")}
+              <span className="text-primary">{tr("hero.title.highlight")}</span>
+              {tr("hero.title.2")}
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-xl">
-              Trendyol ve Hepsiburada'da markanızı koruyun. SahteAvcı ile fikri mülkiyet ihlallerini otomatikleştirin, itibarınızı güvence altına alın.
+              {tr("hero.subtitle")}
             </p>
             <div className="flex flex-wrap gap-3 mb-6">
               <Button variant="cta" size="lg" asChild>
-                <a href="#">Ücretsiz Yükle</a>
+                <a href="#">{tr("cta.install")}</a>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="#how-it-works">Nasıl Çalışır?</a>
+                <a href="#how-it-works">{tr("cta.howworks")}</a>
               </Button>
             </div>
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />500+ marka korunuyor</span>
-              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />10.000+ sahte ürün tespit edildi</span>
-              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />%100 yerel işleme</span>
+              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />{tr("hero.trust1")}</span>
+              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />{tr("hero.trust2")}</span>
+              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" />{tr("hero.trust3")}</span>
             </div>
           </div>
         </Reveal>
@@ -85,9 +87,9 @@ function HeroSection() {
             </div>
             <div className="flex items-center justify-between pt-2 border-t">
               <span className="text-xs font-semibold text-primary flex items-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5" /> 2 Şüpheli Listing Tespit Edildi
+                <ShieldCheck className="h-3.5 w-3.5" /> {tr("hero.demo.suspicious")}
               </span>
-              <span className="text-xs text-muted-foreground">Delil Kaydet →</span>
+              <span className="text-xs text-muted-foreground">{tr("hero.demo.save")}</span>
             </div>
           </div>
         </Reveal>
@@ -97,38 +99,37 @@ function HeroSection() {
 }
 
 /* ==================== PROBLEM ==================== */
-const problemCards = [
-  { number: "15+", label: "saat/hafta", desc: "Manuel sahte ürün aramasına harcanan ortalama süre" },
-  { number: "%85", label: "işletme", desc: "En az bir kez marka ihlaliyle karşılaştığını söylüyor" },
-  { number: "$1,000+", label: "/ay", desc: "Enterprise araçların başlangıç maliyeti" },
-  { number: "∞", label: "döngü", desc: "Bir ihlal kapanır, yenileri açılır" },
-];
-
 function ProblemSection() {
+  const { tr } = useLang();
+  const problemCards = [
+    { numKey: "problem.stat1", labelKey: "problem.stat1.label", descKey: "problem.stat1.desc" },
+    { numKey: "problem.stat2", labelKey: "problem.stat2.label", descKey: "problem.stat2.desc" },
+    { numKey: "problem.stat3", labelKey: "problem.stat3.label", descKey: "problem.stat3.desc" },
+    { numKey: "problem.stat4", labelKey: "problem.stat4.label", descKey: "problem.stat4.desc" },
+  ];
+
   return (
     <Section id="problem" variant="alt">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Markanız Kopyalanıyor mu?</h2>
-          <p className="text-muted-foreground">
-            Trendyol ve Hepsiburada'da markanızı korumak tam zamanlı bir işe dönüşebilir. Sahte ürünler satışlarınızı çalar, marka değerinizi zedeler ve müşteri güvenini aşındırır.
-          </p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("problem.title")}</h2>
+          <p className="text-muted-foreground">{tr("problem.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         {problemCards.map((c, i) => (
           <Reveal key={i} delay={i * 0.08}>
             <div className="bg-card rounded-xl border p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-              <p className="text-3xl md:text-4xl font-extrabold text-primary mb-1">{c.number}</p>
-              <p className="text-sm font-semibold text-foreground mb-2">{c.label}</p>
-              <p className="text-sm text-muted-foreground">{c.desc}</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-primary mb-1">{tr(c.numKey)}</p>
+              <p className="text-sm font-semibold text-foreground mb-2">{tr(c.labelKey)}</p>
+              <p className="text-sm text-muted-foreground">{tr(c.descKey)}</p>
             </div>
           </Reveal>
         ))}
       </div>
       <Reveal>
         <p className="text-center text-muted-foreground font-medium max-w-xl mx-auto">
-          Manuel takip yavaş, kurumsal çözümler pahalı. <span className="text-foreground font-semibold">SahteAvcı bu boşluğu doldurur.</span>
+          {tr("problem.cta")} <span className="text-foreground font-semibold">{tr("problem.cta.bold")}</span>
         </p>
       </Reveal>
     </Section>
@@ -136,19 +137,20 @@ function ProblemSection() {
 }
 
 /* ==================== HOW IT WORKS ==================== */
-const steps = [
-  { icon: Download, title: "Yükle", desc: "Chrome'a SahteAvcı'yı ekleyin. Kurulum 30 saniyeden kısa sürer." },
-  { icon: Search, title: "Tara", desc: "Markanızı, anahtar kelimenizi veya tescilli ibarenizi girin. Trendyol ve Hepsiburada'da otomatik tarama başlasın." },
-  { icon: FileCheck, title: "Delil Topla & Şikayet Et", desc: "Şüpheli listingleri işaretleyin, delilleri kaydedin ve hazır şikayet taslağı oluşturun." },
-];
-
 function HowItWorksSection() {
+  const { tr } = useLang();
+  const steps = [
+    { icon: Download, titleKey: "how.step1", descKey: "how.step1.desc" },
+    { icon: Search, titleKey: "how.step2", descKey: "how.step2.desc" },
+    { icon: FileCheck, titleKey: "how.step3", descKey: "how.step3.desc" },
+  ];
+
   return (
     <Section id="how-it-works">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">SahteAvcı ile Kontrol Sizde</h2>
-          <p className="text-muted-foreground">Kurulumdan şikayete kadar süreç birkaç dakikada tamamlanır.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("how.title")}</h2>
+          <p className="text-muted-foreground">{tr("how.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-8 md:gap-6 relative">
@@ -160,8 +162,8 @@ function HowItWorksSection() {
                 <s.icon className="h-6 w-6" />
               </div>
               <span className="absolute -top-1 -right-1 md:static md:block text-xs font-bold text-primary bg-primary/10 rounded-full h-6 w-6 inline-flex items-center justify-center md:mx-auto md:mb-2">{i + 1}</span>
-              <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground max-w-xs mx-auto">{s.desc}</p>
+              <h3 className="text-lg font-bold text-foreground mb-2">{tr(s.titleKey)}</h3>
+              <p className="text-sm text-muted-foreground max-w-xs mx-auto">{tr(s.descKey)}</p>
             </div>
           </Reveal>
         ))}
@@ -169,7 +171,7 @@ function HowItWorksSection() {
       <Reveal>
         <div className="text-center mt-10">
           <Button variant="cta" size="lg" asChild>
-            <a href="#">Ücretsiz Başla</a>
+            <a href="#">{tr("cta.start")}</a>
           </Button>
         </div>
       </Reveal>
@@ -178,22 +180,23 @@ function HowItWorksSection() {
 }
 
 /* ==================== FEATURES ==================== */
-const features = [
-  { icon: Search, title: "Akıllı Arama", desc: "Unicode hileleri, homoglifler ve Türkçe sahtecilik jargonu gibi zor varyasyonları yakalar." },
-  { icon: Shield, title: "SHA-256 Delil Toplama", desc: "Toplanan kayıtları kriptografik doğrulamayla saklayarak delil güvenilirliğini artırır." },
-  { icon: FileText, title: "Otomatik Şikayet Şablonları", desc: "Trendyol ve Hepsiburada süreçlerine uygun, hızlı kullanılabilen hazır metinler üretir." },
-  { icon: Eye, title: "Fiyat Anomali Tespiti", desc: "Şüpheli derecede düşük fiyatlı ürünleri öne çıkararak riskli listingleri hızla görünür kılar." },
-  { icon: Image, title: "Görsel Benzerlik Analizi", desc: "Değiştirilmiş ürün görselleri arasında benzerlik tespiti yaparak manuel gözden kaçan sonuçları yakalar." },
-  { icon: Lock, title: "%100 Yerel İşleme", desc: "Verileriniz mümkün olduğunca tarayıcı içinde işlenir; güvenlik ve gizlilik odakta kalır." },
-];
-
 function FeaturesSection() {
+  const { tr } = useLang();
+  const features = [
+    { icon: Search, titleKey: "feat.1.title", descKey: "feat.1.desc" },
+    { icon: Shield, titleKey: "feat.2.title", descKey: "feat.2.desc" },
+    { icon: FileText, titleKey: "feat.3.title", descKey: "feat.3.desc" },
+    { icon: Eye, titleKey: "feat.4.title", descKey: "feat.4.desc" },
+    { icon: Image, titleKey: "feat.5.title", descKey: "feat.5.desc" },
+    { icon: Lock, titleKey: "feat.6.title", descKey: "feat.6.desc" },
+  ];
+
   return (
     <Section id="features" variant="alt">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Neden SahteAvcı?</h2>
-          <p className="text-muted-foreground">Türk pazaryerleri için geliştirilmiş, hızlı ve uygulanabilir marka koruma araçları.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("feat.title")}</h2>
+          <p className="text-muted-foreground">{tr("feat.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -203,8 +206,8 @@ function FeaturesSection() {
               <div className="inline-flex items-center justify-center h-11 w-11 rounded-lg bg-primary/10 text-primary mb-4">
                 <f.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-foreground mb-2">{f.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+              <h3 className="text-base font-bold text-foreground mb-2">{tr(f.titleKey)}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{tr(f.descKey)}</p>
             </div>
           </Reveal>
         ))}
@@ -212,7 +215,7 @@ function FeaturesSection() {
       <Reveal>
         <div className="text-center mt-8">
           <Button variant="outline" asChild>
-            <Link to="/ozellikler">Tüm Özellikleri Gör <ChevronRight className="h-4 w-4" /></Link>
+            <Link to="/ozellikler">{tr("feat.cta")} <ChevronRight className="h-4 w-4" /></Link>
           </Button>
         </div>
       </Reveal>
@@ -221,36 +224,37 @@ function FeaturesSection() {
 }
 
 /* ==================== PRICING ==================== */
-const plans = [
-  {
-    name: "ÜCRETSİZ", price: "₺0", period: "/ay", sub: "", badge: "",
-    features: ["1 marka", "50 tarama / ay", "Temel jargon tespiti", "Topluluk desteği"],
-    cta: "Başla", highlight: false,
-  },
-  {
-    name: "BAŞLANGIÇ", price: "$49", period: "/ay", sub: "~₺1.600", badge: "Popüler",
-    features: ["5 marka", "500 tarama / ay", "pHash görsel analizi", "Şikayet şablonları", "CSV dışa aktarım", "Email desteği"],
-    cta: "Satın Al", highlight: true,
-  },
-  {
-    name: "PRO", price: "$99", period: "/ay", sub: "~₺3.200", badge: "",
-    features: ["Sınırsız marka", "Sınırsız tarama", "BYOK AI", "Gelişmiş görsel analiz", "Blockchain zaman damgası", "Öncelikli destek"],
-    cta: "Satın Al", highlight: false,
-  },
-  {
-    name: "UZMAN", price: "$149", period: "/ay", sub: "~₺4.800", badge: "",
-    features: ["Tüm PRO özellikleri", "CLIP API entegrasyonu", "Mahkeme paketi", "Özel şablonlar", "Danışmanlık"],
-    cta: "Satın Al", highlight: false,
-  },
-];
-
 function PricingSection() {
+  const { tr } = useLang();
+  const plans = [
+    {
+      nameKey: "price.free", price: "₺0", period: "/ay", sub: "", badgeKey: "",
+      features: ["1 marka", "50 tarama / ay", "Temel jargon tespiti", "Topluluk desteği"],
+      ctaKey: "price.begin", highlight: false,
+    },
+    {
+      nameKey: "price.starter", price: "$49", period: "/ay", sub: "~₺1.600", badgeKey: "price.popular",
+      features: ["5 marka", "500 tarama / ay", "pHash görsel analizi", "Şikayet şablonları", "CSV dışa aktarım", "Email desteği"],
+      ctaKey: "price.buy", highlight: true,
+    },
+    {
+      nameKey: "", price: "$99", period: "/ay", sub: "~₺3.200", badgeKey: "",
+      features: ["Sınırsız marka", "Sınırsız tarama", "BYOK AI", "Gelişmiş görsel analiz", "Blockchain zaman damgası", "Öncelikli destek"],
+      ctaKey: "price.buy", highlight: false, name: "PRO",
+    },
+    {
+      nameKey: "", price: "$149", period: "/ay", sub: "~₺4.800", badgeKey: "",
+      features: ["Tüm PRO özellikleri", "CLIP API entegrasyonu", "Mahkeme paketi", "Özel şablonlar", "Danışmanlık"],
+      ctaKey: "price.buy", highlight: false, name: "UZMAN",
+    },
+  ];
+
   return (
     <Section id="pricing">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Her Büyüklükteki Marka İçin Uygun Fiyat</h2>
-          <p className="text-muted-foreground">Ücretsiz başlayın, ihtiyaç büyüdükçe yükseltin.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("price.title")}</h2>
+          <p className="text-muted-foreground">{tr("price.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -259,8 +263,8 @@ function PricingSection() {
             <div className={`rounded-xl border p-6 flex flex-col h-full ${p.highlight ? "border-primary shadow-lg ring-2 ring-primary/20 bg-card" : "bg-card shadow-sm"}`}>
               <div className="mb-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-bold tracking-wider text-muted-foreground">{p.name}</span>
-                  {p.badge && <span className="text-[10px] font-bold bg-primary text-primary-foreground px-2 py-0.5 rounded-full">{p.badge}</span>}
+                  <span className="text-xs font-bold tracking-wider text-muted-foreground">{p.nameKey ? tr(p.nameKey) : p.name}</span>
+                  {p.badgeKey && <span className="text-[10px] font-bold bg-primary text-primary-foreground px-2 py-0.5 rounded-full">{tr(p.badgeKey)}</span>}
                 </div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-extrabold text-foreground">{p.price}</span>
@@ -277,7 +281,7 @@ function PricingSection() {
                 ))}
               </ul>
               <Button variant={p.highlight ? "cta" : "outline"} className="w-full" asChild>
-                <a href="#">{p.cta}</a>
+                <a href="#">{tr(p.ctaKey)}</a>
               </Button>
             </div>
           </Reveal>
@@ -285,9 +289,9 @@ function PricingSection() {
       </div>
       <Reveal>
         <div className="text-center mt-6 space-y-2">
-          <p className="text-sm text-muted-foreground">Tüm ücretli planlar için taksitli ödeme desteği mevcuttur.</p>
+          <p className="text-sm text-muted-foreground">{tr("price.note")}</p>
           <Button variant="link" asChild>
-            <Link to="/fiyatlandirma">Detaylı fiyat karşılaştırması →</Link>
+            <Link to="/fiyatlandirma">{tr("price.detail")}</Link>
           </Button>
         </div>
       </Reveal>
@@ -304,12 +308,13 @@ const testimonials = [
 ];
 
 function TestimonialsSection() {
+  const { tr } = useLang();
   return (
     <Section id="testimonials" variant="alt">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Markaların Güvendiği Çözüm</h2>
-          <p className="text-muted-foreground">Küçük ekiplerden uzman danışmanlara kadar, zaman kazandıran pratik koruma.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("test.title")}</h2>
+          <p className="text-muted-foreground">{tr("test.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid sm:grid-cols-2 gap-5">
@@ -342,11 +347,12 @@ const faqs = [
 ];
 
 function FAQSection() {
+  const { tr } = useLang();
   return (
     <Section id="faq">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Sık Sorulan Sorular</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("faq.title")}</h2>
         </div>
       </Reveal>
       <Reveal>
@@ -361,7 +367,7 @@ function FAQSection() {
           </Accordion>
           <div className="text-center mt-6">
             <Button variant="link" asChild>
-              <Link to="/sss">Tüm soruları görüntüle →</Link>
+              <Link to="/sss">{tr("faq.all")}</Link>
             </Button>
           </div>
         </div>
@@ -371,19 +377,20 @@ function FAQSection() {
 }
 
 /* ==================== SECURITY ==================== */
-const securityCards = [
-  { icon: Lock, title: "%100 Yerel İşleme", desc: "Her şey tarayıcınızda gerçekleşir. Verilerinizi asla sunucularımıza göndermiyoruz." },
-  { icon: ShieldOff, title: "Hesap Erişimi Yok", desc: "SahteAvcı sadece herkese açık ürün sayfalarını okur. Trendyol veya Hepsiburada şifrenizi asla istemiyoruz." },
-  { icon: CheckCircle, title: "KVKK Uyumlu", desc: "6698 sayılı Kişisel Verilerin Korunması Kanunu'na tam uyum. Avrupa'da kayıtlı şirket." },
-];
-
 function SecuritySection() {
+  const { tr } = useLang();
+  const securityCards = [
+    { icon: Lock, titleKey: "sec.1.title", descKey: "sec.1.desc" },
+    { icon: ShieldOff, titleKey: "sec.2.title", descKey: "sec.2.desc" },
+    { icon: CheckCircle, titleKey: "sec.3.title", descKey: "sec.3.desc" },
+  ];
+
   return (
     <Section id="security" variant="alt">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Güvenlik ve Güven Temelde</h2>
-          <p className="text-muted-foreground">Marka koruma aracında hız kadar güven de önemlidir.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("sec.title")}</h2>
+          <p className="text-muted-foreground">{tr("sec.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-5 mb-8">
@@ -391,17 +398,17 @@ function SecuritySection() {
           <Reveal key={i} delay={i * 0.08}>
             <div className="bg-primary/5 rounded-xl p-6 text-center">
               <c.icon className="h-8 w-8 text-primary mx-auto mb-4" />
-              <h3 className="text-base font-bold text-foreground mb-2">{c.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+              <h3 className="text-base font-bold text-foreground mb-2">{tr(c.titleKey)}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{tr(c.descKey)}</p>
             </div>
           </Reveal>
         ))}
       </div>
       <Reveal>
         <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-          <span>🔐 Şifreli veriler</span>
-          <span>🇪🇺 Avrupa şirketi</span>
-          <span>📋 Şeffaf gizlilik politikası</span>
+          <span>🔐 {tr("sec.badge1")}</span>
+          <span>🇪🇺 {tr("sec.badge2")}</span>
+          <span>📋 {tr("sec.badge3")}</span>
         </div>
       </Reveal>
     </Section>
@@ -416,12 +423,13 @@ const teamMembers = [
 ];
 
 function TeamSection() {
+  const { tr } = useLang();
   return (
     <Section id="team">
       <Reveal>
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Ekibimiz</h2>
-          <p className="text-muted-foreground">20+ yıllık fikri mülkiyet ve e-ticaret deneyimi.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("team.title")}</h2>
+          <p className="text-muted-foreground">{tr("team.subtitle")}</p>
         </div>
       </Reveal>
       <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
@@ -442,6 +450,7 @@ function TeamSection() {
 
 /* ==================== NEWSLETTER ==================== */
 function NewsletterSection() {
+  const { tr } = useLang();
   const [nlEmail, setNlEmail] = useState("");
   const [nlConsent, setNlConsent] = useState(false);
   const [nlError, setNlError] = useState("");
@@ -449,7 +458,7 @@ function NewsletterSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!nlConsent) {
-      setNlError("KVKK onayı gereklidir");
+      setNlError(tr("news.kvkk_error"));
       return;
     }
     setNlError("");
@@ -460,20 +469,20 @@ function NewsletterSection() {
       <Reveal>
         <div className="max-w-xl mx-auto text-center">
           <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Güncellemeleri Kaçırmayın</h2>
-          <p className="text-muted-foreground mb-6">Yeni özellikler, marka koruma ipuçları ve pazaryeri güncellemeleri için e-posta listemize katılın.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("news.title")}</h2>
+          <p className="text-muted-foreground mb-6">{tr("news.subtitle")}</p>
           <form onSubmit={handleSubmit} className="space-y-3 mb-3">
             <div className="flex flex-col sm:flex-row gap-3">
-              <Input type="email" placeholder="E-posta adresiniz" className="flex-1" value={nlEmail} onChange={e => setNlEmail(e.target.value)} />
-              <Button variant="cta" type="submit" disabled={!nlEmail}>Abone Ol</Button>
+              <Input type="email" placeholder={tr("news.placeholder")} className="flex-1" value={nlEmail} onChange={e => setNlEmail(e.target.value)} />
+              <Button variant="cta" type="submit" disabled={!nlEmail}>{tr("news.btn")}</Button>
             </div>
             <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer text-left">
               <Checkbox checked={nlConsent} onCheckedChange={v => { setNlConsent(!!v); if (v) setNlError(""); }} className="mt-0.5" />
-              <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+              <span>{tr("news.kvkk")}</span>
             </label>
             {nlError && <p className="text-sm text-primary font-medium">{nlError}</p>}
           </form>
-          <p className="text-xs text-muted-foreground">Abone olarak iletişim ve güncelleme e-postaları almayı kabul etmiş olursunuz. İstediğiniz zaman ayrılabilirsiniz.</p>
+          <p className="text-xs text-muted-foreground">{tr("news.footer")}</p>
         </div>
       </Reveal>
     </Section>
@@ -482,16 +491,17 @@ function NewsletterSection() {
 
 /* ==================== FINAL CTA ==================== */
 function FinalCTASection() {
+  const { tr } = useLang();
   return (
     <section id="final-cta" className="py-16 md:py-20 px-4 md:px-8 bg-secondary text-secondary-foreground">
       <Reveal>
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Markanızı Korumaya Bugün Başlayın</h2>
-          <p className="text-secondary-foreground/80 mb-7">Ücretsiz plan ile hemen başlayın. Kurulum dakikalar içinde tamamlanır.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("final.title")}</h2>
+          <p className="text-secondary-foreground/80 mb-7">{tr("final.subtitle")}</p>
           <Button variant="cta" size="lg" asChild>
-            <a href="#">Chrome'a Ücretsiz Yükle</a>
+            <a href="#">{tr("cta.install_chrome")}</a>
           </Button>
-          <p className="text-sm text-secondary-foreground/60 mt-5">Siz markanızı büyütün, SahteAvcı şüpheli listingleri takip etsin.</p>
+          <p className="text-sm text-secondary-foreground/60 mt-5">{tr("final.footer")}</p>
         </div>
       </Reveal>
     </section>

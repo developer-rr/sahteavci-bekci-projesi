@@ -89,11 +89,11 @@ function SearchMockup() {
       <circle cx="32" cy="78" r="4" fill="#4ADE80" />
       <rect x="44" y="72" width="160" height="8" rx="3" fill="#3A3A5E" />
       <rect x="240" y="72" width="48" height="8" rx="3" fill="#3A3A5E" />
-      <rect x="16" y="104" width="288" height="36" rx="8" fill="#D32F2F" opacity="0.08" stroke="#D32F2F" strokeWidth="1" opacity="0.3" />
+      <rect x="16" y="104" width="288" height="36" rx="8" fill="#D32F2F" opacity={0.08} stroke="#D32F2F" strokeWidth="1" />
       <circle cx="32" cy="122" r="4" fill="#D32F2F" />
       <rect x="44" y="116" width="140" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
       <rect x="240" y="116" width="48" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
-      <rect x="16" y="148" width="288" height="36" rx="8" fill="#D32F2F" opacity="0.08" stroke="#D32F2F" strokeWidth="1" opacity="0.3" />
+      <rect x="16" y="148" width="288" height="36" rx="8" fill="#D32F2F" opacity={0.08} stroke="#D32F2F" strokeWidth="1" />
       <circle cx="32" cy="166" r="4" fill="#D32F2F" />
       <rect x="44" y="160" width="120" height="8" rx="3" fill="#D32F2F" opacity="0.3" />
       <rect x="240" y="160" width="48" height="8" rx="3" fill="#D32F2F" opacity="0.3" />

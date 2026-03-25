@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Section from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { useLang } from "@/lib/i18n";
 
 interface LegalSection {
   title: string;
@@ -13,14 +14,13 @@ interface LegalPageProps {
 }
 
 export default function LegalPageTemplate({ title, sections }: LegalPageProps) {
+  const { tr } = useLang();
   return (
     <Section>
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{title}</h1>
-        <p className="text-muted-foreground text-sm mb-3">Son güncelleme: Mart 2026</p>
-        <p className="text-muted-foreground text-xs mb-10 italic">
-          Bu sayfa nihai yasal metin hazırlanana kadar yer tutucu içerik içermektedir. Güncel ve bağlayıcı metin ayrıca yayınlanacaktır.
-        </p>
+        <p className="text-muted-foreground text-sm mb-3">{tr("legal.updated")}</p>
+        <p className="text-muted-foreground text-xs mb-10 italic">{tr("legal.placeholder")}</p>
 
         <div className="space-y-10">
           {sections.map((s, i) => (
@@ -34,9 +34,9 @@ export default function LegalPageTemplate({ title, sections }: LegalPageProps) {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border">
-          <p className="text-muted-foreground text-sm mb-4">Sorularınız için: destek@sahteavci.com</p>
+          <p className="text-muted-foreground text-sm mb-4">{tr("legal.contact")}</p>
           <Button variant="outline" asChild>
-            <Link to="/">Ana Sayfaya Dön</Link>
+            <Link to="/">{tr("legal.back")}</Link>
           </Button>
         </div>
       </div>

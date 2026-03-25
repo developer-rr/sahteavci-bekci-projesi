@@ -7,6 +7,7 @@ import Pill from "@/components/ui/pill";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLang } from "@/lib/i18n";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -27,103 +28,102 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
   );
 }
 
-type Category = "Genel" | "Fiyatlandırma" | "Teknik" | "Güvenlik & Gizlilik" | "Şikayetler & Yasal";
+type CatKey = "genel" | "fiyat" | "teknik" | "guvenlik" | "yasal";
 
-interface FaqItem { q: string; a: string; cat: Category }
+interface FaqItem { qKey: string; aKey: string; cat: CatKey }
 
 const faqs: FaqItem[] = [
-  { cat: "Genel", q: "SahteAvcı tam olarak ne yapar?", a: "SahteAvcı, Trendyol ve Hepsiburada gibi pazaryerlerinde şüpheli listingleri daha hızlı tespit etmeye, delil akışını düzenlemeye ve şikayet operasyonunu kolaylaştırmaya yardımcı olur." },
-  { cat: "Genel", q: "Kimler için uygundur?", a: "Özellikle küçük ve orta ölçekli marka sahipleri, pazaryeri ekipleri, marka yöneticileri ve fikri mülkiyet danışmanları için uygundur." },
-  { cat: "Genel", q: "Tescilli marka gerekli mi?", a: "Hayır. Anahtar kelime ve marka adıyla da takip yapılabilir. Ancak tescilli marka, resmi şikayet süreçlerinde önemli avantaj sağlayabilir." },
-  { cat: "Genel", q: "Hangi pazaryerlerine odaklanır?", a: "Ana odak Trendyol ve Hepsiburada'dır. Kapsam ileride genişletilebilir." },
-  { cat: "Fiyatlandırma", q: "Ücretsiz plan gerçekten ücretsiz mi?", a: "Evet, temel kullanım için ücretsiz başlangıç planı sunulur." },
-  { cat: "Fiyatlandırma", q: "Planımı daha sonra yükseltebilir miyim?", a: "Evet, ihtiyaç arttıkça üst planlara geçiş kurgulanabilir." },
-  { cat: "Fiyatlandırma", q: "Taksitli ödeme var mı?", a: "Ücretli planlar için taksitli ödeme desteği sunulması hedeflenmektedir. Nihai ödeme koşulları satın alma aşamasında gösterilir." },
-  { cat: "Fiyatlandırma", q: "Kurumsal veya özel fiyatlandırma mümkün mü?", a: "Özel ihtiyaçlar için iletişim üzerinden değerlendirme yapılabilir." },
-  { cat: "Teknik", q: "Kurulum ne kadar sürer?", a: "Kurulum genellikle birkaç dakika içinde tamamlanır." },
-  { cat: "Teknik", q: "Teknik bilgi gerekir mi?", a: "Hayır. Ürün, günlük operasyon akışına yakın ve anlaşılır olacak şekilde tasarlanır." },
-  { cat: "Teknik", q: "Veriler dışa aktarılabiliyor mu?", a: "Plan seviyesine bağlı olarak dışa aktarım seçenekleri sunulabilir." },
-  { cat: "Teknik", q: "Görsel analiz tüm planlarda var mı?", a: "Bazı gelişmiş analiz özellikleri yalnızca üst planlarda yer alabilir." },
-  { cat: "Güvenlik & Gizlilik", q: "Eklenti güvenli mi?", a: "Güvenlik ve veri minimizasyonu temel öncelikler arasındadır." },
-  { cat: "Güvenlik & Gizlilik", q: "Verilerim nasıl işlenir?", a: "Mimari mümkün olduğunca yerel işleme yaklaşımına dayanır." },
-  { cat: "Güvenlik & Gizlilik", q: "KVKK ile ilgili taleplerimi nasıl iletebilirim?", a: "KVKK ve veri talepleri için destek e-posta adresi üzerinden iletişime geçebilirsiniz." },
-  { cat: "Güvenlik & Gizlilik", q: "Tüm işlem tamamen yerel mi?", a: "Ürün mümkün olduğunca tarayıcı içi işleme mantığıyla kurgulanır. Nihai teknik çerçeve ilgili belgelerde ayrıca netleştirilebilir." },
-  { cat: "Şikayetler & Yasal", q: "Şikayet metinleri otomatik oluşuyor mu?", a: "Hazır şablonlar sayesinde şikayet süreci daha hızlı ve düzenli hale getirilebilir." },
-  { cat: "Şikayetler & Yasal", q: "Bu araç hukuki danışmanlık yerine geçer mi?", a: "Hayır. SahteAvcı operasyonel kolaylık sağlar; hukuki değerlendirme gereken durumlarda uzman görüşü ayrıca gerekebilir." },
-  { cat: "Şikayetler & Yasal", q: "Toplanan kayıtlar doğrudan mahkemede kullanılabilir mi?", a: "Kayıtlar delil düzeni açısından yardımcı olabilir; ancak hukuki kullanılabilirlik somut olaya göre değerlendirilmelidir." },
-  { cat: "Şikayetler & Yasal", q: "Final yasal belgeler nerede?", a: "Yasal sayfalar hazırlanma sürecindedir ve nihai metinler ayrıca güncellenecektir." },
+  { cat: "genel", qKey: "faqp.q1", aKey: "faqp.a1" },
+  { cat: "genel", qKey: "faqp.q2", aKey: "faqp.a2" },
+  { cat: "genel", qKey: "faqp.q3", aKey: "faqp.a3" },
+  { cat: "genel", qKey: "faqp.q4", aKey: "faqp.a4" },
+  { cat: "fiyat", qKey: "faqp.q5", aKey: "faqp.a5" },
+  { cat: "fiyat", qKey: "faqp.q6", aKey: "faqp.a6" },
+  { cat: "fiyat", qKey: "faqp.q7", aKey: "faqp.a7" },
+  { cat: "fiyat", qKey: "faqp.q8", aKey: "faqp.a8" },
+  { cat: "teknik", qKey: "faqp.q9", aKey: "faqp.a9" },
+  { cat: "teknik", qKey: "faqp.q10", aKey: "faqp.a10" },
+  { cat: "teknik", qKey: "faqp.q11", aKey: "faqp.a11" },
+  { cat: "teknik", qKey: "faqp.q12", aKey: "faqp.a12" },
+  { cat: "guvenlik", qKey: "faqp.q13", aKey: "faqp.a13" },
+  { cat: "guvenlik", qKey: "faqp.q14", aKey: "faqp.a14" },
+  { cat: "guvenlik", qKey: "faqp.q15", aKey: "faqp.a15" },
+  { cat: "guvenlik", qKey: "faqp.q16", aKey: "faqp.a16" },
+  { cat: "yasal", qKey: "faqp.q17", aKey: "faqp.a17" },
+  { cat: "yasal", qKey: "faqp.q18", aKey: "faqp.a18" },
+  { cat: "yasal", qKey: "faqp.q19", aKey: "faqp.a19" },
+  { cat: "yasal", qKey: "faqp.q20", aKey: "faqp.a20" },
 ];
 
-const categories: Category[] = ["Genel", "Fiyatlandırma", "Teknik", "Güvenlik & Gizlilik", "Şikayetler & Yasal"];
+const catKeys: CatKey[] = ["genel", "fiyat", "teknik", "guvenlik", "yasal"];
+const catLabelKeys: Record<CatKey, string> = {
+  genel: "faqp.cat.genel",
+  fiyat: "faqp.cat.fiyat",
+  teknik: "faqp.cat.teknik",
+  guvenlik: "faqp.cat.guvenlik",
+  yasal: "faqp.cat.yasal",
+};
 
 export default function FAQPage() {
+  const { tr } = useLang();
   const [search, setSearch] = useState("");
-  const [activeCat, setActiveCat] = useState<Category | "Tümü">("Tümü");
+  const [activeCat, setActiveCat] = useState<CatKey | "all">("all");
 
   const filtered = useMemo(() => {
     let list = faqs;
-    if (activeCat !== "Tümü") list = list.filter(f => f.cat === activeCat);
+    if (activeCat !== "all") list = list.filter(f => f.cat === activeCat);
     if (search.trim()) {
       const s = search.toLowerCase();
-      list = list.filter(f => f.q.toLowerCase().includes(s) || f.a.toLowerCase().includes(s));
+      list = list.filter(f => tr(f.qKey).toLowerCase().includes(s) || tr(f.aKey).toLowerCase().includes(s));
     }
     return list;
-  }, [search, activeCat]);
+  }, [search, activeCat, tr]);
 
   return (
     <>
-      {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/40 pt-20 pb-16 md:pt-28 md:pb-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <Reveal><Pill>Sık Sorulan Sorular</Pill></Reveal>
+          <Reveal><Pill>{tr("faqp.pill")}</Pill></Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">Aklınızdaki Soruların Kısa Cevapları</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">{tr("faqp.title")}</h1>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">
-              Kurulumdan fiyatlandırmaya, güvenlikten kullanım senaryolarına kadar en çok sorulan başlıkları burada topladık.
-            </p>
+            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">{tr("faqp.subtitle")}</p>
           </Reveal>
         </div>
       </section>
 
       <Section>
-        {/* Search */}
         <Reveal>
           <div className="max-w-xl mx-auto mb-10 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Soru ara..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="pl-10"
-            />
+            <Input placeholder={tr("faqp.search")} value={search} onChange={e => setSearch(e.target.value)} className="pl-10" />
           </div>
         </Reveal>
 
-        {/* Category tabs */}
         <Reveal>
           <div className="flex flex-wrap gap-2 justify-center mb-10">
-            {(["Tümü", ...categories] as const).map(cat => (
+            <button
+              onClick={() => setActiveCat("all")}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCat === "all" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"}`}
+            >
+              {tr("faqp.all")}
+            </button>
+            {catKeys.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCat(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCat === cat
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCat === cat ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"}`}
               >
-                {cat}
+                {tr(catLabelKeys[cat])}
               </button>
             ))}
           </div>
         </Reveal>
 
-        {/* Accordion */}
         <div className="max-w-3xl mx-auto">
           {filtered.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">Aramanızla eşleşen soru bulunamadı.</p>
+            <p className="text-center text-muted-foreground py-8">{tr("faqp.noresult")}</p>
           ) : (
             <Accordion type="multiple" className="space-y-3">
               {filtered.map((faq, i) => (
@@ -131,11 +131,11 @@ export default function FAQPage() {
                   <AccordionTrigger className="text-left text-foreground font-medium py-4 hover:no-underline">
                     <span className="flex items-start gap-3">
                       <MessageCircleQuestion className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      {faq.q}
+                      {tr(faq.qKey)}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-sm pb-4 pl-8 leading-relaxed">
-                    {faq.a}
+                    {tr(faq.aKey)}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -144,16 +144,15 @@ export default function FAQPage() {
         </div>
       </Section>
 
-      {/* BOTTOM CTA */}
       <section className="bg-secondary text-secondary-foreground py-16 md:py-20 px-4 md:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Sorunuz burada yok mu?</h2>
-            <p className="text-secondary-foreground/70 mb-8">Bize yazın, yönlendirelim.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("faqp.cta.title")}</h2>
+            <p className="text-secondary-foreground/70 mb-8">{tr("faqp.cta.text")}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="cta" size="lg" asChild><Link to="/iletisim">İletişime Geç</Link></Button>
+              <Button variant="cta" size="lg" asChild><Link to="/iletisim">{tr("faqp.cta.contact")}</Link></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
-                <a href="#">Ücretsiz Yükle</a>
+                <a href="#">{tr("cta.install")}</a>
               </Button>
             </div>
           </Reveal>

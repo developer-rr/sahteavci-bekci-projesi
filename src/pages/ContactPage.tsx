@@ -7,6 +7,7 @@ import Section from "@/components/ui/section";
 import Pill from "@/components/ui/pill";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLang } from "@/lib/i18n";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -27,91 +28,84 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
   );
 }
 
-const contactInfo = [
-  { icon: Mail, label: "Destek e-postası", value: "destek@sahteavci.com" },
-  { icon: Clock, label: "Yanıt süresi", value: "24–48 saat" },
-  { icon: Shield, label: "KVKK talepleri", value: "destek@sahteavci.com" },
-  { icon: Building2, label: "Şirket", value: "VENTOS ARQUEÁVEIS UNIPESSOAL LDA" },
-  { icon: MapPin, label: "Kayıt ülkesi", value: "Portekiz" },
-];
-
-const supportTopics = [
-  { icon: HelpCircle, text: "Ürün hakkında genel sorular" },
-  { icon: CreditCard, text: "Plan ve fiyatlandırma soruları" },
-  { icon: Code, text: "Teknik geri bildirim" },
-  { icon: Shield, text: "KVKK ve veri talepleri" },
-  { icon: Handshake, text: "İş birliği ve danışmanlık talepleri" },
-];
-
 export default function ContactPage() {
+  const { tr } = useLang();
   const [email, setEmail] = useState("");
   const [interests, setInterests] = useState({ updates: false, tips: false, campaigns: false });
   const [consent, setConsent] = useState(false);
 
+  const contactInfo = [
+    { icon: Mail, labelKey: "contact.info.email", value: "destek@sahteavci.com" },
+    { icon: Clock, labelKey: "contact.info.response", valueKey: "contact.info.response.val" },
+    { icon: Shield, labelKey: "contact.info.kvkk", value: "destek@sahteavci.com" },
+    { icon: Building2, labelKey: "contact.info.company", value: "VENTOS ARQUEÁVEIS UNIPESSOAL LDA" },
+    { icon: MapPin, labelKey: "contact.info.country", valueKey: "contact.info.country.val" },
+  ];
+
+  const supportTopics = [
+    { icon: HelpCircle, key: "contact.topic1" },
+    { icon: CreditCard, key: "contact.topic2" },
+    { icon: Code, key: "contact.topic3" },
+    { icon: Shield, key: "contact.topic4" },
+    { icon: Handshake, key: "contact.topic5" },
+  ];
+
   return (
     <>
-      {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/40 pt-20 pb-16 md:pt-28 md:pb-20 px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <Reveal><Pill>İletişim</Pill></Reveal>
+          <Reveal><Pill>{tr("contact.pill")}</Pill></Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">Bizimle İletişime Geçin</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-6 leading-tight">{tr("contact.title")}</h1>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">
-              Sorularınız, geri bildirimleriniz ve destek talepleriniz için buradayız.
-            </p>
+            <p className="text-muted-foreground text-lg md:text-xl mt-5 max-w-2xl mx-auto">{tr("contact.subtitle")}</p>
           </Reveal>
         </div>
       </section>
 
-      {/* TWO-COLUMN */}
       <Section>
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* LEFT — Contact info */}
           <Reveal>
             <div>
-              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">İletişim Bilgileri</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6">{tr("contact.info.title")}</h2>
               <div className="space-y-4">
                 {contactInfo.map(c => (
-                  <div key={c.label} className="flex items-start gap-3 bg-card rounded-xl border border-border p-4">
+                  <div key={c.labelKey} className="flex items-start gap-3 bg-card rounded-xl border border-border p-4">
                     <c.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wide">{c.label}</p>
-                      <p className="text-foreground text-sm font-medium">{c.value}</p>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide">{tr(c.labelKey)}</p>
+                      <p className="text-foreground text-sm font-medium">{c.valueKey ? tr(c.valueKey) : c.value}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <p className="text-muted-foreground text-sm mt-5">En hızlı iletişim kanalı e-postadır.</p>
+              <p className="text-muted-foreground text-sm mt-5">{tr("contact.info.fastest")}</p>
             </div>
           </Reveal>
 
-          {/* RIGHT — Newsletter form */}
           <Reveal delay={0.1}>
             <div className="bg-card rounded-xl border border-border p-6 md:p-8">
-              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">Güncellemeler İçin Abone Olun</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                Yeni özellikler, marka koruma ipuçları ve ürün güncellemeleri için e-posta listemize katılın.
-              </p>
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">{tr("contact.subscribe.title")}</h2>
+              <p className="text-muted-foreground text-sm mb-6">{tr("contact.subscribe.text")}</p>
 
               <form onSubmit={e => e.preventDefault()} className="space-y-5">
                 <div>
-                  <label className="text-sm font-medium text-foreground block mb-1.5">E-posta adresi</label>
+                  <label className="text-sm font-medium text-foreground block mb-1.5">{tr("contact.subscribe.email")}</label>
                   <Input type="email" placeholder="ornek@sirket.com" value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-foreground mb-2">İlgi alanları (opsiyonel)</p>
+                  <p className="text-sm font-medium text-foreground mb-2">{tr("contact.subscribe.interests")}</p>
                   <div className="space-y-2.5">
                     {([
-                      { key: "updates" as const, label: "Ürün güncellemeleri" },
-                      { key: "tips" as const, label: "Marka koruma ipuçları" },
-                      { key: "campaigns" as const, label: "Kampanya ve duyurular" },
+                      { key: "updates" as const, labelKey: "contact.subscribe.updates" },
+                      { key: "tips" as const, labelKey: "contact.subscribe.tips" },
+                      { key: "campaigns" as const, labelKey: "contact.subscribe.campaigns" },
                     ]).map(item => (
                       <label key={item.key} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
                         <Checkbox checked={interests[item.key]} onCheckedChange={v => setInterests(p => ({ ...p, [item.key]: !!v }))} />
-                        {item.label}
+                        {tr(item.labelKey)}
                       </label>
                     ))}
                   </div>
@@ -119,28 +113,27 @@ export default function ContactPage() {
 
                 <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer">
                   <Checkbox checked={consent} onCheckedChange={v => setConsent(!!v)} className="mt-0.5" />
-                  <span>KVKK ve iletişim onayını kabul ediyorum</span>
+                  <span>{tr("contact.subscribe.consent")}</span>
                 </label>
 
-                <Button variant="cta" className="w-full" disabled={!email || !consent}>Abone Ol</Button>
+                <Button variant="cta" className="w-full" disabled={!email || !consent}>{tr("news.btn")}</Button>
               </form>
 
-              <p className="text-muted-foreground text-xs mt-4">İstediğiniz zaman abonelikten çıkabilirsiniz.</p>
+              <p className="text-muted-foreground text-xs mt-4">{tr("contact.subscribe.unsub")}</p>
             </div>
           </Reveal>
         </div>
       </Section>
 
-      {/* SUPPORT NOTE */}
       <Section variant="alt">
         <Reveal>
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6 text-center">Hangi Konular İçin Yazabilirsiniz?</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6 text-center">{tr("contact.topics.title")}</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {supportTopics.map(t => (
-                <div key={t.text} className="flex items-center gap-3 bg-card rounded-lg border border-border p-4">
+                <div key={t.key} className="flex items-center gap-3 bg-card rounded-lg border border-border p-4">
                   <t.icon className="h-5 w-5 text-primary shrink-0" />
-                  <span className="text-foreground text-sm">{t.text}</span>
+                  <span className="text-foreground text-sm">{tr(t.key)}</span>
                 </div>
               ))}
             </div>
@@ -148,16 +141,15 @@ export default function ContactPage() {
         </Reveal>
       </Section>
 
-      {/* FINAL CTA */}
       <section className="bg-secondary text-secondary-foreground py-16 md:py-20 px-4 md:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Önce deneyin, sonra bize ne düşündüğünüzü yazın</h2>
-            <p className="text-secondary-foreground/70 mb-8">Kurulumla başlayın, ardından ihtiyaç duyarsanız iletişime geçin.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("contact.cta.title")}</h2>
+            <p className="text-secondary-foreground/70 mb-8">{tr("contact.cta.text")}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="cta" size="lg" asChild><a href="#">Ücretsiz Yükle</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
-                <Link to="/sss">SSS'yi Gör</Link>
+                <Link to="/sss">{tr("contact.cta.faq")}</Link>
               </Button>
             </div>
           </Reveal>

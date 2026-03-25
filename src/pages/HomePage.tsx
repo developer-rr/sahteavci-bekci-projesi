@@ -1,6 +1,8 @@
-import { Shield, Eye, Search, Lock, BarChart3, FileCheck, Download, FileText, BadgeAlert, Image, Check, ChevronRight, Mail, Quote, ShieldCheck, Globe, Server, Zap } from "lucide-react";
+import { useState } from "react";
+import { Shield, Eye, Search, Lock, BarChart3, FileCheck, Download, FileText, BadgeAlert, Image, Check, ChevronRight, Mail, Quote, ShieldCheck, Globe, Server, Zap, ShieldOff, CheckCircle, User, Users, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import Section from "@/components/ui/section";
 import Pill from "@/components/ui/pill";
 import { motion } from "framer-motion";
@@ -30,10 +32,8 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
 function HeroSection() {
   return (
     <Section className="pt-20 md:pt-28 pb-12 md:pb-16 relative overflow-hidden">
-      {/* subtle bg pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/60 -z-10" />
       <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-        {/* Left */}
         <Reveal>
           <div>
             <Pill variant="primary" className="mb-5">Chrome Eklentisi</Pill>
@@ -61,16 +61,13 @@ function HeroSection() {
           </div>
         </Reveal>
 
-        {/* Right — Product mockup */}
         <Reveal delay={0.15}>
           <div className="bg-card rounded-xl border shadow-lg p-5 space-y-4">
-            {/* Search bar */}
             <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-2.5">
               <Search className="h-4 w-4 text-muted-foreground shrink-0" />
               <span className="text-sm text-foreground font-medium">marka-adi-örnek</span>
               <span className="ml-auto text-xs bg-primary/10 text-primary rounded px-2 py-0.5 font-medium">Trendyol</span>
             </div>
-            {/* Results */}
             <div className="space-y-2.5">
               {[
                 { name: "Orijinal Marka Ürünü", price: "₺249", safe: true },
@@ -86,7 +83,6 @@ function HeroSection() {
                 </div>
               ))}
             </div>
-            {/* Bottom bar */}
             <div className="flex items-center justify-between pt-2 border-t">
               <span className="text-xs font-semibold text-primary flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5" /> 2 Şüpheli Listing Tespit Edildi
@@ -156,7 +152,6 @@ function HowItWorksSection() {
         </div>
       </Reveal>
       <div className="grid md:grid-cols-3 gap-8 md:gap-6 relative">
-        {/* connector lines (desktop only) */}
         <div className="hidden md:block absolute top-14 left-[calc(33.33%+0.75rem)] right-[calc(33.33%+0.75rem)] h-0.5 border-t-2 border-dashed border-border" />
         {steps.map((s, i) => (
           <Reveal key={i} delay={i * 0.12}>
@@ -376,14 +371,11 @@ function FAQSection() {
 }
 
 /* ==================== SECURITY ==================== */
-const trustBadges = [
-  { icon: Lock, label: "SSL ile korunan bağlantılar" },
-  { icon: ShieldCheck, label: "KVKK odaklı yaklaşım" },
-  { icon: Globe, label: "Avrupa şirket yapısı" },
-  { icon: Server, label: "Şifreli kayıt mantığı" },
+const securityCards = [
+  { icon: Lock, title: "%100 Yerel İşleme", desc: "Her şey tarayıcınızda gerçekleşir. Verilerinizi asla sunucularımıza göndermiyoruz." },
+  { icon: ShieldOff, title: "Hesap Erişimi Yok", desc: "SahteAvcı sadece herkese açık ürün sayfalarını okur. Trendyol veya Hepsiburada şifrenizi asla istemiyoruz." },
+  { icon: CheckCircle, title: "KVKK Uyumlu", desc: "6698 sayılı Kişisel Verilerin Korunması Kanunu'na tam uyum. Avrupa'da kayıtlı şirket." },
 ];
-
-const bottomBadges = ["Trendyol odağı", "Hepsiburada odağı", "SMB dostu fiyatlama", "Hızlı kurulum"];
 
 function SecuritySection() {
   return (
@@ -394,38 +386,75 @@ function SecuritySection() {
           <p className="text-muted-foreground">Marka koruma aracında hız kadar güven de önemlidir.</p>
         </div>
       </Reveal>
-      <div className="grid md:grid-cols-2 gap-8 mb-8">
-        <Reveal>
-          <p className="text-muted-foreground leading-relaxed">
-            SahteAvcı, veri güvenliği ve hukuki süreçlerde kullanılabilir kayıt mantığını birlikte düşünür. Amaç yalnızca tespit değil, güvenilir aksiyon akışı sağlamaktır.
-          </p>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <div className="grid grid-cols-2 gap-3">
-            {trustBadges.map((b, i) => (
-              <div key={i} className="flex items-center gap-2.5 bg-card rounded-lg border p-3.5 shadow-sm">
-                <b.icon className="h-5 w-5 text-primary shrink-0" />
-                <span className="text-sm font-medium text-foreground">{b.label}</span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+      <div className="grid md:grid-cols-3 gap-5 mb-8">
+        {securityCards.map((c, i) => (
+          <Reveal key={i} delay={i * 0.08}>
+            <div className="bg-primary/5 rounded-xl p-6 text-center">
+              <c.icon className="h-8 w-8 text-primary mx-auto mb-4" />
+              <h3 className="text-base font-bold text-foreground mb-2">{c.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+            </div>
+          </Reveal>
+        ))}
       </div>
       <Reveal>
-        <div className="flex flex-wrap justify-center gap-3">
-          {bottomBadges.map((b, i) => (
-            <span key={i} className="text-xs font-medium bg-card border rounded-full px-4 py-2 text-muted-foreground shadow-sm flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-primary" />{b}
-            </span>
-          ))}
+        <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+          <span>🔐 Şifreli veriler</span>
+          <span>🇪🇺 Avrupa şirketi</span>
+          <span>📋 Şeffaf gizlilik politikası</span>
         </div>
       </Reveal>
     </Section>
   );
 }
 
+/* ==================== TEAM ==================== */
+const teamMembers = [
+  { initials: "AK", name: "A.K.", title: "Kurucu & IP Stratejisti", desc: "15+ yıl marka hukuku" },
+  { initials: "MV", name: "M.V.", title: "Teknik Geliştirici", desc: "E-ticaret otomasyon uzmanı" },
+  { initials: "ET", name: "E.T.", title: "Müşteri Başarısı", desc: "Trendyol & Hepsiburada operasyon" },
+];
+
+function TeamSection() {
+  return (
+    <Section id="team">
+      <Reveal>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Ekibimiz</h2>
+          <p className="text-muted-foreground">20+ yıllık fikri mülkiyet ve e-ticaret deneyimi.</p>
+        </div>
+      </Reveal>
+      <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        {teamMembers.map((m, i) => (
+          <Reveal key={i} delay={i * 0.08}>
+            <div className="bg-card rounded-xl border p-6 text-center shadow-sm">
+              <div className="h-14 w-14 rounded-full bg-primary/10 text-primary flex items-center justify-center text-lg font-bold mx-auto mb-4">{m.initials}</div>
+              <h3 className="font-semibold text-foreground mb-1">{m.name}</h3>
+              <p className="text-sm text-primary font-medium mb-1">{m.title}</p>
+              <p className="text-xs text-muted-foreground">{m.desc}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 /* ==================== NEWSLETTER ==================== */
 function NewsletterSection() {
+  const [nlEmail, setNlEmail] = useState("");
+  const [nlConsent, setNlConsent] = useState(false);
+  const [nlError, setNlError] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nlConsent) {
+      setNlError("KVKK onayı gereklidir");
+      return;
+    }
+    setNlError("");
+  };
+
   return (
     <Section id="newsletter">
       <Reveal>
@@ -433,9 +462,16 @@ function NewsletterSection() {
           <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Güncellemeleri Kaçırmayın</h2>
           <p className="text-muted-foreground mb-6">Yeni özellikler, marka koruma ipuçları ve pazaryeri güncellemeleri için e-posta listemize katılın.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-3 mb-3">
-            <Input type="email" placeholder="E-posta adresiniz" className="flex-1" />
-            <Button variant="cta">Abone Ol</Button>
+          <form onSubmit={handleSubmit} className="space-y-3 mb-3">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Input type="email" placeholder="E-posta adresiniz" className="flex-1" value={nlEmail} onChange={e => setNlEmail(e.target.value)} />
+              <Button variant="cta" type="submit" disabled={!nlEmail}>Abone Ol</Button>
+            </div>
+            <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer text-left">
+              <Checkbox checked={nlConsent} onCheckedChange={v => { setNlConsent(!!v); if (v) setNlError(""); }} className="mt-0.5" />
+              <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+            </label>
+            {nlError && <p className="text-sm text-primary font-medium">{nlError}</p>}
           </form>
           <p className="text-xs text-muted-foreground">Abone olarak iletişim ve güncelleme e-postaları almayı kabul etmiş olursunuz. İstediğiniz zaman ayrılabilirsiniz.</p>
         </div>
@@ -474,6 +510,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <FAQSection />
       <SecuritySection />
+      <TeamSection />
       <NewsletterSection />
       <FinalCTASection />
     </>

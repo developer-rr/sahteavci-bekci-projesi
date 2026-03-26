@@ -18,6 +18,7 @@ import TermsPage from "@/pages/legal/TermsPage";
 import KVKKPage from "@/pages/legal/KVKKPage";
 import CookiesPage from "@/pages/legal/CookiesPage";
 import RefundPage from "@/pages/legal/RefundPage";
+import LegalIndexPage from "@/pages/legal/LegalIndexPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/sss" element={<FAQPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/iletisim" element={<ContactPage />} />
+              <Route path="/yasal" element={<LegalIndexPage />} />
               <Route path="/yasal/gizlilik" element={<PrivacyPage />} />
               <Route path="/yasal/kosullar" element={<TermsPage />} />
               <Route path="/yasal/kvkk" element={<KVKKPage />} />

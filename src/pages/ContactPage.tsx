@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Mail, Clock, Building2, MapPin, Shield, HelpCircle, CreditCard, Code, Handshake } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -33,7 +34,35 @@ export default function ContactPage() {
   const [email, setEmail] = useState("");
   const [interests, setInterests] = useState({ updates: false, tips: false, campaigns: false });
   const [consent, setConsent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [consentError, setConsentError] = useState("");
 
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !consent) {
+      if (!consent) setConsentError(tr("news.kvkk_error"));
+      return;
+    }
+    setConsentError("");
+    setSending(true);
+    const selectedInterests = Object.entries(interests).filter(([, v]) => v).map(([k]) => k).join(", ");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "form-name": "newsletter-contact", email, interests: selectedInterests }).toString(),
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr("form.success"));
+      setEmail("");
+      setInterests({ updates: false, tips: false, campaigns: false });
+      setConsent(false);
+    } catch {
+      toast.error(tr("form.error"));
+    } finally {
+      setSending(false);
+    }
+  };
   const contactInfo = [
     { icon: Mail, labelKey: "contact.info.email", value: "destek@sahteavci.com" },
     { icon: Clock, labelKey: "contact.info.response", valueKey: "contact.info.response.val" },
@@ -89,7 +118,7 @@ export default function ContactPage() {
               <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">{tr("contact.subscribe.title")}</h2>
               <p className="text-muted-foreground text-sm mb-6">{tr("contact.subscribe.text")}</p>
 
-              <form onSubmit={e => e.preventDefault()} className="space-y-5">
+              <form onSubmit={handleContactSubmit} className="space-y-5">
                 <div>
                   <label className="text-sm font-medium text-foreground block mb-1.5">{tr("contact.subscribe.email")}</label>
                   <Input type="email" placeholder="ornek@sirket.com" value={email} onChange={e => setEmail(e.target.value)} />
@@ -112,11 +141,14 @@ export default function ContactPage() {
                 </div>
 
                 <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer">
-                  <Checkbox checked={consent} onCheckedChange={v => setConsent(!!v)} className="mt-0.5" />
+                  <Checkbox checked={consent} onCheckedChange={v => { setConsent(!!v); if (v) setConsentError(""); }} className="mt-0.5" />
                   <span>{tr("contact.subscribe.consent")}</span>
                 </label>
+                {consentError && <p className="text-sm text-primary font-medium">{consentError}</p>}
 
-                <Button variant="cta" className="w-full" disabled={!email || !consent}>{tr("news.btn")}</Button>
+                <Button variant="cta" className="w-full" disabled={!email || !consent || sending}>
+                  {sending ? tr("form.sending") : tr("news.btn")}
+                </Button>
               </form>
 
               <p className="text-muted-foreground text-xs mt-4">{tr("contact.subscribe.unsub")}</p>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Clock, Mail } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Section from "@/components/ui/section";
@@ -30,7 +31,27 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
 export default function BlogPage() {
   const { tr } = useLang();
   const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
 
+  const handleBlogSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSending(true);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "form-name": "newsletter-blog", email }).toString(),
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr("form.success"));
+      setEmail("");
+    } catch {
+      toast.error(tr("form.error"));
+    } finally {
+      setSending(false);
+    }
+  };
   const articles = [
     { catKey: "blog.art1.cat", titleKey: "blog.art1.title", excerptKey: "blog.art1.excerpt" },
     { catKey: "blog.art2.cat", titleKey: "blog.art2.title", excerptKey: "blog.art2.excerpt" },
@@ -99,9 +120,9 @@ export default function BlogPage() {
             <Mail className="h-9 w-9 text-primary mx-auto mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">{tr("blog.newsletter.title")}</h2>
             <p className="text-muted-foreground text-sm mb-6">{tr("blog.newsletter.text")}</p>
-            <form onSubmit={e => e.preventDefault()} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form onSubmit={handleBlogSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input type="email" placeholder={tr("news.placeholder")} value={email} onChange={e => setEmail(e.target.value)} className="flex-1" />
-              <Button variant="cta" disabled={!email}>{tr("news.btn")}</Button>
+              <Button variant="cta" disabled={!email || sending}>{sending ? tr("form.sending") : tr("news.btn")}</Button>
             </form>
           </div>
         </Reveal>

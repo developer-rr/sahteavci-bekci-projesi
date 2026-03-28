@@ -119,6 +119,9 @@ export const t: Translations = {
   "news.kvkk": { tr: "KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.", en: "I accept the processing of my personal data under KVKK." },
   "news.kvkk_error": { tr: "KVKK onayı gereklidir", en: "KVKK consent is required" },
   "news.footer": { tr: "Abone olarak iletişim ve güncelleme e-postaları almayı kabul etmiş olursunuz. İstediğiniz zaman ayrılabilirsiniz.", en: "By subscribing you agree to receive communication and update emails. You can unsubscribe anytime." },
+  "form.sending": { tr: "Gönderiliyor...", en: "Sending..." },
+  "form.success": { tr: "Başarıyla gönderildi!", en: "Successfully submitted!" },
+  "form.error": { tr: "Bir hata oluştu. Lütfen tekrar deneyin.", en: "An error occurred. Please try again." },
 
   // ==================== FINAL CTA ====================
   "final.title": { tr: "Markanızı Korumaya Bugün Başlayın", en: "Start Protecting Your Brand Today" },

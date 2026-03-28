@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { Shield, Eye, Search, Lock, BarChart3, FileCheck, Download, FileText, BadgeAlert, Image, Check, ChevronRight, Mail, Quote, ShieldCheck, Globe, Server, Zap, ShieldOff, CheckCircle, User, Users, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -454,14 +455,31 @@ function NewsletterSection() {
   const [nlEmail, setNlEmail] = useState("");
   const [nlConsent, setNlConsent] = useState(false);
   const [nlError, setNlError] = useState("");
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!nlConsent) {
       setNlError(tr("news.kvkk_error"));
       return;
     }
     setNlError("");
+    setSending(true);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "form-name": "newsletter-home", email: nlEmail }).toString(),
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr("form.success"));
+      setNlEmail("");
+      setNlConsent(false);
+    } catch {
+      toast.error(tr("form.error"));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -474,7 +492,7 @@ function NewsletterSection() {
           <form onSubmit={handleSubmit} className="space-y-3 mb-3">
             <div className="flex flex-col sm:flex-row gap-3">
               <Input type="email" placeholder={tr("news.placeholder")} className="flex-1" value={nlEmail} onChange={e => setNlEmail(e.target.value)} />
-              <Button variant="cta" type="submit" disabled={!nlEmail}>{tr("news.btn")}</Button>
+              <Button variant="cta" type="submit" disabled={!nlEmail || sending}>{sending ? tr("form.sending") : tr("news.btn")}</Button>
             </div>
             <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer text-left">
               <Checkbox checked={nlConsent} onCheckedChange={v => { setNlConsent(!!v); if (v) setNlError(""); }} className="mt-0.5" />

@@ -30,6 +30,21 @@
 </head>
 
   <body>
+    <!-- Hidden Netlify forms for SPA detection -->
+    <form name="popup-offer" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+    </form>
+    <form name="newsletter-home" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+    </form>
+    <form name="newsletter-blog" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+    </form>
+    <form name="newsletter-contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+      <input type="text" name="interests" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

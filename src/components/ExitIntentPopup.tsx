@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { X } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import { toast } from "sonner";
 
 const STORAGE_KEY = "sahteavci_exit_dismissed";
 
@@ -11,6 +12,7 @@ export default function ExitIntentPopup() {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
+  const [sending, setSending] = useState(false);
   const { tr } = useLang();
 
   const dismiss = useCallback(() => {
@@ -34,6 +36,28 @@ export default function ExitIntentPopup() {
     };
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !consent) return;
+    setSending(true);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "form-name": "popup-offer", email }).toString(),
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr("form.success"));
+      setEmail("");
+      setConsent(false);
+      dismiss();
+    } catch {
+      toast.error(tr("form.error"));
+    } finally {
+      setSending(false);
+    }
+  };
+
   if (!show) return null;
 
   return (
@@ -47,7 +71,7 @@ export default function ExitIntentPopup() {
         <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">{tr("exit.title")}</h2>
         <p className="text-muted-foreground text-sm mb-5">{tr("exit.desc")}</p>
 
-        <form onSubmit={e => e.preventDefault()} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <Input type="email" placeholder={tr("exit.placeholder")} value={email} onChange={e => setEmail(e.target.value)} />
 
           <label className="flex items-start gap-2 text-sm text-foreground cursor-pointer">
@@ -55,7 +79,9 @@ export default function ExitIntentPopup() {
             <span>{tr("exit.kvkk")}</span>
           </label>
 
-          <Button variant="cta" className="w-full" disabled={!email || !consent}>{tr("exit.btn")}</Button>
+          <Button variant="cta" className="w-full" disabled={!email || !consent || sending}>
+            {sending ? tr("form.sending") : tr("exit.btn")}
+          </Button>
         </form>
 
         <button onClick={dismiss} className="block mx-auto mt-4 text-muted-foreground text-sm hover:text-foreground transition-colors">

@@ -73,7 +73,7 @@ export default function Header() {
             </button>
           </div>
           <Button variant="cta" size="default" asChild>
-            <a href="#">{tr("cta.install")}</a>
+            <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a>
           </Button>
         </div>
 
@@ -121,7 +121,7 @@ export default function Header() {
             </div>
             <div className="mt-4">
               <Button variant="cta" className="w-full" asChild>
-                <a href="#">{tr("cta.install")}</a>
+                <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a>
               </Button>
             </div>
           </nav>

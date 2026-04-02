@@ -143,7 +143,7 @@ export default function BlogPage() {
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
                 <Link to="/ozellikler">{tr("blog.cta.features")}</Link>
               </Button>
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a></Button>
             </div>
           </Reveal>
         </div>

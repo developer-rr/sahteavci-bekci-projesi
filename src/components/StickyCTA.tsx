@@ -21,7 +21,7 @@ export default function StickyCTA() {
           {tr("sticky.text")} — <span className="text-muted-foreground">{tr("sticky.free")}</span>
         </p>
         <Button variant="cta" size="sm" asChild>
-          <a href="#">{tr("sticky.btn")}</a>
+          <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("sticky.btn")}</a>
         </Button>
       </div>
     </div>

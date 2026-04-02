@@ -68,7 +68,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.2}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" asChild><Link to="/iletisim">{tr("about.contact")}</Link></Button>
             </div>
           </Reveal>
@@ -174,7 +174,7 @@ export default function AboutPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("about.cta.title")}</h2>
             <p className="text-secondary-foreground/70 mb-8">{tr("about.cta.text")}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
                 <Link to="/fiyatlandirma">{tr("about.cta.prices")}</Link>
               </Button>

@@ -245,7 +245,7 @@ export default function FeaturesPage() {
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-2xl">{tr("featp.subtitle")}</p>
             <div className="flex flex-wrap gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" asChild><Link to="/fiyatlandirma">{tr("featp.prices")}</Link></Button>
             </div>
           </div>
@@ -307,7 +307,7 @@ export default function FeaturesPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("featp.cta.title")}</h2>
             <p className="text-secondary-foreground/70 mb-8 max-w-xl mx-auto">{tr("featp.cta.text")}</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.install")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
                 <Link to="/fiyatlandirma">{tr("featp.cta.plans")}</Link>
               </Button>

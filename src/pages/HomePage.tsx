@@ -50,7 +50,7 @@ function HeroSection() {
             </p>
             <div className="flex flex-wrap gap-3 mb-6">
               <Button variant="cta" size="lg" asChild>
-                <a href="#">{tr("cta.install")}</a>
+                <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a>
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <a href="#how-it-works">{tr("cta.howworks")}</a>
@@ -172,7 +172,7 @@ function HowItWorksSection() {
       <Reveal>
         <div className="text-center mt-10">
           <Button variant="cta" size="lg" asChild>
-            <a href="#">{tr("cta.start")}</a>
+            <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.start")}</a>
           </Button>
         </div>
       </Reveal>
@@ -282,7 +282,7 @@ function PricingSection() {
                 ))}
               </ul>
               <Button variant={p.highlight ? "cta" : "outline"} className="w-full" asChild>
-                <a href="#">{tr(p.ctaKey)}</a>
+                <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr(p.ctaKey)}</a>
               </Button>
             </div>
           </Reveal>
@@ -517,7 +517,7 @@ function FinalCTASection() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("final.title")}</h2>
           <p className="text-secondary-foreground/80 mb-7">{tr("final.subtitle")}</p>
           <Button variant="cta" size="lg" asChild>
-            <a href="#">{tr("cta.install_chrome")}</a>
+            <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install_chrome")}</a>
           </Button>
           <p className="text-sm text-secondary-foreground/60 mt-5">{tr("final.footer")}</p>
         </div>

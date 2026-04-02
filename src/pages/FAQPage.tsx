@@ -152,7 +152,7 @@ export default function FAQPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button variant="cta" size="lg" asChild><Link to="/iletisim">{tr("faqp.cta.contact")}</Link></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
-                <a href="#">{tr("cta.install")}</a>
+                <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.install")}</a>
               </Button>
             </div>
           </Reveal>

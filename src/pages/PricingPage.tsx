@@ -95,7 +95,7 @@ export default function PricingPage() {
             </h1>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-2xl">{tr("pricep.subtitle")}</p>
             <div className="flex flex-wrap gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.start")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.start")}</a></Button>
               <Button variant="outline" size="lg" asChild><Link to="/karsilastirma">{tr("pricep.compare")}</Link></Button>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <Button variant={p.popular ? "cta" : "outline"} className="w-full" asChild>
-                  <a href="#">{tr(p.ctaKey)}</a>
+                  <a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr(p.ctaKey)}</a>
                 </Button>
               </div>
             </Reveal>
@@ -219,7 +219,7 @@ export default function PricingPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{tr("pricep.cta.title")}</h2>
             <p className="text-secondary-foreground/70 mb-8 max-w-xl mx-auto">{tr("pricep.cta.text")}</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button variant="cta" size="lg" asChild><a href="#">{tr("cta.start")}</a></Button>
+              <Button variant="cta" size="lg" asChild><a href="https://chromewebstore.google.com/detail/sahteavc%C4%B1-%E2%80%94-marka-koruma/kbpadejggjidclkppdinhhhpccdmpppf" target="_blank" rel="noopener noreferrer">{tr("cta.start")}</a></Button>
               <Button variant="outline" size="lg" className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/10" asChild>
                 <Link to="/ozellikler">{tr("pricep.cta.features")}</Link>
               </Button>
